@@ -15,8 +15,8 @@ class Solution {
             i=m-1;
             DFS(board,check,i,j,m,n);
         }
-         for(int i=1;i<m-1;i++){
-            for(int j=1;j<n-1;j++){
+         for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
                 if(!check[i][j])board[i][j]='X';
             }
          }
