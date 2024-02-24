@@ -12,59 +12,37 @@ class Solution {
 
         //finding places from which water can flow to pacific
         int i=0,j=0;
-        //int count=0;
         while(j<n){
-            //System.out.println(i+"--"+j);
-            DFS(heights,checkP,i,j,m,n,0,-1);
-            //print(check,m,n);
-            //count++;
-            //if(count==3)break;
+            DFS(heights,checkP,i,j,m,n,-1);
             j++;
         }
         i=0;j=0;
         while(i<m){
-            //System.out.println(i+"--"+j);
-            DFS(heights,checkP,i,j,m,n,0,-1);
-            //print(check,m,n);
-            //count++;
-            //if(count==3)break;
+            DFS(heights,checkP,i,j,m,n,-1);
             i++;
         }
-        //print(check,m,n);
         //finding places from which water can flow to Atlantic
         i=m-1;j=n-1;
         while(j>=0){
-            DFS(heights,checkA,i,j,m,n,1,-1);
+            DFS(heights,checkA,i,j,m,n,-1);
             j--;
         }
         i=m-2;j=n-1;
         while(i>=0){
-            DFS(heights,checkA,i,j,m,n,1,-1);
+            DFS(heights,checkA,i,j,m,n,-1);
             i--;
         }
-        //print(check,m,n);
         return ansCreator(checkP,checkA,m,n); 
     }
 
-    public void DFS(int[][] heights,int[][] check,int i,int j,int m,int n,int pOrA,int prev){
-        if(i>=m || j>=n || i<0 ||j<0 || !decideToPursue(check,i,j,pOrA) || heights[i][j]<prev) return;
+    public void DFS(int[][] heights,int[][] check,int i,int j,int m,int n,int prev){
+        if(i>=m || j>=n || i<0 ||j<0 || check[i][j]!=0 || heights[i][j]<prev) return;
         check[i][j]++;
-        DFS(heights,check,i-1,j,m,n,pOrA,heights[i][j]);
-        DFS(heights,check,i+1,j,m,n,pOrA,heights[i][j]);
-        DFS(heights,check,i,j-1,m,n,pOrA,heights[i][j]);
-        DFS(heights,check,i,j+1,m,n,pOrA,heights[i][j]);
+        DFS(heights,check,i-1,j,m,n,heights[i][j]);
+        DFS(heights,check,i+1,j,m,n,heights[i][j]);
+        DFS(heights,check,i,j-1,m,n,heights[i][j]);
+        DFS(heights,check,i,j+1,m,n,heights[i][j]);
     }
-
-    public boolean decideToPursue(int[][] check,int i,int j,int pOrA){
-        if(pOrA==0){
-            if(check[i][j]==0)return true;
-            return false;
-        }else{
-            if(check[i][j]==0)return true;
-            return false;
-        }
-    }
-
     public List<List<Integer>> ansCreator(int[][] checkP,int[][] checkA,int m,int n){
         List<List<Integer>> ans = new ArrayList<>();
          for(int k=0;k<m;k++){
@@ -78,15 +56,5 @@ class Solution {
             }
         }
         return ans;
-    }
-
-    public void print(int[][] check,int m,int n){
-        for(int k=0;k<m;k++){
-            for(int l=0;l<n;l++){
-                System.out.print(check[k][l]+"--");
-            }
-            System.out.println();
-        }
-        System.out.println("************************************");
     }
 }
