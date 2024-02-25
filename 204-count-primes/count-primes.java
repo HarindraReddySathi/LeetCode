@@ -5,6 +5,7 @@ class Solution {
         primes[0]=true;
         primes[1]=true;
         for(int i=2;i<n+1;i++){
+            if(primes[i]) continue;
             int j=2*i;
             while(j<n){
                 primes[j] =true;
