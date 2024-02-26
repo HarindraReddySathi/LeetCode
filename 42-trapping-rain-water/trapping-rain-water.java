@@ -1,5 +1,6 @@
 class Solution {
-    public int trap(int[] height) {
+    /*public int trap(int[] height) {
+        //SC -O(2n) Tc-O(3n)
         int n = height.length;
         int[] preMax = new int[n];
         int[] postMax = new int[n];
@@ -19,6 +20,23 @@ class Solution {
         int ans =0;
         for(int i=0;i<n;i++){
             if(Math.min(postMax[i],preMax[i])>height[i]) ans+=Math.min(postMax[i],preMax[i])-height[i];
+        }
+        return ans;
+    }*/
+
+    public int trap(int[] height) {
+        int n = height.length;
+        int leftMax = Integer.MIN_VALUE;
+        int rightMax = Integer.MIN_VALUE;
+        int i=0;
+        int j=n-1;
+        int ans=0;
+        while(i<=j){
+            if(height[i]>leftMax)leftMax=height[i];
+            if(height[j]>rightMax)rightMax=height[j];
+            ans+=(leftMax<rightMax)?leftMax-height[i]:rightMax-height[j];
+            if(leftMax<rightMax)i++;
+            else j--;
         }
         return ans;
     }
