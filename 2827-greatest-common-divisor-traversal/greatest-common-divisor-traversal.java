@@ -2,6 +2,8 @@ class Solution {
 
     public boolean canTraverseAllPairs(int[] nums) {
 
+        //Time Complexity O(N) or O(MAX_VALUE(log(MAX_VALUE)))
+        // Here N limit na d MAX_VALUE limit are same so TC -O(Nlog(N))
         int n = nums.length;
         if(n==1) return true;
         int max = Integer.MIN_VALUE;
@@ -9,13 +11,15 @@ class Solution {
             if(nums[i]==1) return false;
             max=Math.max(max,nums[i]);
         }
-        // returns the list of prime factors for all integers less than max+1;
+        // Returns the list of prime factors for all integers less than max+1;
+        // At max any integer max hav 10 distinct prime factors
         Map<Integer,List<Integer>> preimeFactorMap = primeFactorCalculator(max+1);
         Map<Integer,Node> presentPrimes = new HashMap<>();
         Set<Integer> isVisited = new HashSet<>();
 
         //1. To connect each node  to its smallest prime factor
         //2. To connect all prime factors to its smallest prime factor in each step
+        //Time complexity is of O(10N)
         for(int i=0;i<n;i++){
             int cur = nums[i];
             Node smallPrime = null;
@@ -36,20 +40,18 @@ class Solution {
         }
 
         int count=0;
-        //System.out.println(presentPrimes.keySet().size());
-        /*for(Integer i : presentPrimes.keySet()){
-            System.out.println(i+"---"+presentPrimes.get(i).map.keySet().size());
-        }*/
+        //1. Do DFS on each prime and also check ideally we should enter dfs function only once if entered twice return false
+        //Time Complexity is O(N)
         for(Integer i : presentPrimes.keySet()){
             if(isVisited.contains(i))continue;
             if(count>=1) return false;
             DFS(presentPrimes,i,isVisited);
             count++;
         }
-        //System.out.println(count);
         return true;
     }
-
+    
+    //it is of complexity O(nlog(n))
     public Map<Integer,List<Integer>> primeFactorCalculator(int n) {
         Map<Integer,List<Integer>> ans = new HashMap<>();
         ans.put(0,new ArrayList<>());
@@ -68,12 +70,6 @@ class Solution {
                 j+=i;
             }
         }
-        /*for(int i=2;i<n;i++){
-            if(!primes[i]){
-                ans.add(i);
-                //System.out.println(i);
-            }
-        }*/
         return ans;
     }
 
