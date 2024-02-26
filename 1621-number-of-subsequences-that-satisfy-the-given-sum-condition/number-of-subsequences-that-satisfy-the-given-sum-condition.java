@@ -3,11 +3,11 @@ class Solution {
         Arrays.sort(nums);
         int n = nums.length;
         int i =0;int j = n-1;
-        long ans =0;
+        int ans =0;
         int mod = 1_000_000_007;
-        long[] power = new long[nums.length];
+        int[] power = new int[n];
         power[0] = 1;
-        for (int k = 1; k < nums.length; k++) {
+        for (int k = 1; k < n; k++) {
             power[k] = (power[k - 1] << 1) % mod;
         }
         while(j>=i){
@@ -18,6 +18,6 @@ class Solution {
                 j--;
             }
         }
-        return (int)ans;
+        return ans;
     }
 }
