@@ -25,6 +25,21 @@ class Solution {
     }*/
 
     public int trap(int[] height) {
+        //TC -o(N) SC-O(1)
+        /*
+            1. if we are at point i with knowing max value to the left of it.(including i)
+            2. if we are at point j with knowing max value to the right of it.(includng j)
+            3. always i>=j
+            4. for ith point if there exists a value that is greater than the maximum value left of it on right side of i then obviously
+               the amount of water stored above ith point will only be depenedent on the max value left of it.so we can add that to ans 
+               and move right.
+            5. for jth point if there exists a value that is greater than the maximum value right of it on left side of j then obviously
+               the amount of water stored above jth point will only be depenedent on the max value right of it.so we can add that to ans 
+               and move left.
+            6. So we should move right if(leftmax<rightMax) and should move left if the condition is reverse in two pointer approach
+            7. Update ans in each iteration
+            
+        */
         int n = height.length;
         int leftMax = Integer.MIN_VALUE;
         int rightMax = Integer.MIN_VALUE;
