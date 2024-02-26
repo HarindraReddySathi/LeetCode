@@ -8,7 +8,7 @@ class Solution {
         int[] power = new int[n];
         power[0] = 1;
         for (int k = 1; k < n; k++) {
-            power[k] = (power[k - 1] << 1) % mod;
+            power[k] = (power[k - 1]*2) % mod;
         }
         while(j>=i){
             if(nums[i]+nums[j]<=target){
