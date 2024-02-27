@@ -1,7 +1,7 @@
 class Solution {
     public int maxVowels(String s, int k) {
-        Set<Character> vowels = new HashSet<>();
-        vowels.add('a'); vowels.add('e'); vowels.add('i'); vowels.add('o'); vowels.add('u');
+        //Set<Character> vowels = new HashSet<>();
+        //vowels.add('a'); vowels.add('e'); vowels.add('i'); vowels.add('o'); vowels.add('u');
         boolean[] alpha = new boolean[26];
         alpha['a'-'a']=true; alpha['e'-'a']=true; alpha['i'-'a']=true; alpha['o'-'a']=true; alpha['u'-'a']=true;
         int n = s.length();
