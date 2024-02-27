@@ -4,9 +4,8 @@ class Solution {
         int end1 = minCalculator(event1[1]);
         int start2 = minCalculator(event2[0]);
         int end2 = minCalculator(event2[1]);
-        if((start2>=start1 && start2<=end1) || (end2>=start1 && end2<=end1)) return true;
-        if((start2<=start1 && end2>=end1)) return true;
-        return false;
+        if((start2>end1)||(start1>end2)) return false;
+        return true;
     }
 
     public int minCalculator(String s){
