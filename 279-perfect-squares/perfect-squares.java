@@ -1,7 +1,32 @@
 class Solution {
 
-
     public int numSquares(int n) {
+        List<Integer> sq = getSquares(n);
+        int[] isVisited = new int[n+1];
+        squares(n,sq,isVisited);
+        if(n>=4)System.out.println(isVisited[1]);
+        return isVisited[n];
+    }
+
+    public int squares(int n,List<Integer> sq, int[] isVisited ){
+        if(n==0) return 0;
+        int min =Integer.MAX_VALUE;
+        for(Integer i : sq){
+            if(i>n) break;
+            int k=0;
+            if(n-i==0)min=0;
+            else if(n-i>0){
+                if(isVisited[n-i]==0)k = squares(n-i,sq,isVisited);
+                else k = isVisited[n-i];
+                min = Math.min(min,k);
+            }
+        }
+        isVisited[n]=min+1;
+        return min+1;
+    }
+
+
+    /*public int numSquares(int n) {
         List<Integer> sq = getSquares(n);
         int[] ans = new int[n+1];
         ans[0]=0;
@@ -16,7 +41,7 @@ class Solution {
             i++;
         }
         return (ans[n]==0)?-1:ans[n];
-    }
+    }*/
 
     /*public int numSquares(int n) {
         List<Integer> sq = getSquares(n);
