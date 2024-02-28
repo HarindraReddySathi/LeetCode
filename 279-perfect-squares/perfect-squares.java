@@ -1,6 +1,6 @@
 class Solution {
 
-    public int numSquares(int n) {
+    /*public int numSquares(int n) {
         List<Integer> sq = getSquares(n);
         int[] isVisited = new int[n+1];
         squares(n,sq,isVisited);
@@ -23,7 +23,7 @@ class Solution {
         }
         isVisited[n]=min+1;
         return min+1;
-    }
+    }*/
 
 
     /*public int numSquares(int n) {
@@ -43,29 +43,27 @@ class Solution {
         return (ans[n]==0)?-1:ans[n];
     }*/
 
-    /*public int numSquares(int n) {
+    public int numSquares(int n) {
         List<Integer> sq = getSquares(n);
         Set<Integer> s = new HashSet<>();
         Queue<Integer> q = new LinkedList<>();
         q.add(0);
-        q.add(-1);
         int level =1;
         while(!q.isEmpty()){
-            int curr = q.poll();
-            if(curr==-1){
-                level++;
-                if(!q.isEmpty()) q.add(-1);
-                continue;
+            int size = q.size();
+            for(int p=0;p<size;p++){
+                int curr = q.poll();
+                for(Integer i : sq){
+                    if(curr+i==n) return level;
+                    if(s.contains(curr+i) || curr+i>n)continue;
+                    q.add(curr+i);
+                    s.add(curr+i);
+                }
             }
-            for(Integer i : sq){
-                if(curr+i==n) return level;
-                if(s.contains(curr+i) || curr+i>n)continue;
-                q.add(curr+i);
-                s.add(curr+i);
-            }
+            level++;
         }
         return -1;
-    }*/
+    }
 
     public List<Integer> getSquares(int n){
         int i=1;
