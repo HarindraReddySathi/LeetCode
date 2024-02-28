@@ -1,10 +1,5 @@
 class Solution {
     public List<List<String>> solveNQueens(int n) {
-        /*Set<Integer> up = new HashSet<>();
-        Set<Integer> down = new HashSet<>();
-        Set<Integer> x = new HashSet<>();
-        Set<Integer> y = new HashSet<>();*/
-
         boolean[] up = new boolean[2*n+1];
         boolean[] down = new boolean[2*n+1];
         boolean[] x = new boolean[n];
@@ -33,24 +28,6 @@ class Solution {
                     }
                 }
     }
-
-    public void queens(List<List<String>> ans, Set<Integer> up, Set<Integer> down, Set<Integer> x, Set<Integer> y,
-            int[][] temp, int level,int n) {
-                if(level==n){
-                    convertToString(ans,temp,n);
-                    return;
-                }
-                for(int j=0;j<n;j++){
-                    if(!up.contains(level+j) && !down.contains(level-j) && !x.contains(level) && !y.contains(j) ){
-                        temp[level][j]=1;
-                        up.add(level+j);down.add(level-j);x.add(level);y.add(j);
-                        queens(ans,up,down,x,y,temp,level+1,n);
-                        up.remove(level+j);down.remove(level-j);x.remove(level);y.remove(j);
-                        temp[level][j]=0;
-                    }
-                }
-    }
-
     public void convertToString(List<List<String>> ans,int[][] memo,int n){
 
         List<String> temp = new ArrayList<>();
