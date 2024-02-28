@@ -10,8 +10,8 @@ class Solution {
         int[] memo = new int[n+1];
         memo[1]= (p==0)?nums[0]:0;
         for(int i = 2;i<=n;i++){
-            int k = (i==n+1)? 1:i;
-            memo[i]=Math.max(memo[i-1],memo[i-2]+nums[k-1]);
+            //int k = (i==n+1)? 1:i;
+            memo[i]=Math.max(memo[i-1],memo[i-2]+nums[i-1]);
         }
         return memo[n];
     }
