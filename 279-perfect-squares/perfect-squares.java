@@ -45,8 +45,9 @@ class Solution {
 
     public int numSquares(int n) {
         List<Integer> sq = getSquares(n);
-        Set<Integer> s = new HashSet<>();
         Queue<Integer> q = new LinkedList<>();
+        boolean[] isVisited = new boolean[n+1];
+        isVisited[0]=true;
         q.add(0);
         int level =1;
         while(!q.isEmpty()){
@@ -55,9 +56,9 @@ class Solution {
                 int curr = q.poll();
                 for(Integer i : sq){
                     if(curr+i==n) return level;
-                    if(s.contains(curr+i) || curr+i>n)continue;
+                    if(curr+i>n || isVisited[curr+i])continue;
                     q.add(curr+i);
-                    s.add(curr+i);
+                    isVisited[curr+i]=true;;
                 }
             }
             level++;
