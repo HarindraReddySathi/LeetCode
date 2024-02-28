@@ -1,13 +1,37 @@
 class Solution {
     public List<List<String>> solveNQueens(int n) {
-        Set<Integer> up = new HashSet<>();
+        /*Set<Integer> up = new HashSet<>();
         Set<Integer> down = new HashSet<>();
         Set<Integer> x = new HashSet<>();
-        Set<Integer> y = new HashSet<>();
+        Set<Integer> y = new HashSet<>();*/
+
+        boolean[] up = new boolean[2*n+1];
+        boolean[] down = new boolean[2*n+1];
+        boolean[] x = new boolean[n];
+        boolean[] y = new boolean[n];
+
         List<List<String>> ans = new ArrayList<>();
         int[][] temp = new int[n][n];
+
         queens(ans,up,down,x,y,temp,0,n);
         return ans;
+    }
+
+    public void queens(List<List<String>> ans, boolean[] up, boolean[] down, boolean[] x, boolean[] y,
+            int[][] temp, int level,int n) {
+                if(level==n){
+                    convertToString(ans,temp,n);
+                    return;
+                }
+                for(int j=0;j<n;j++){
+                    if(!up[level+j] && !down[n-level+j] && !x[level] && !y[j] ){
+                        temp[level][j]=1;
+                        up[level+j]=true;down[n-level+j]=true;x[level]=true;y[j]=true;
+                        queens(ans,up,down,x,y,temp,level+1,n);
+                        up[level+j]=false;down[n-level+j]=false;x[level]=false;y[j]=false;
+                        temp[level][j]=0;
+                    }
+                }
     }
 
     public void queens(List<List<String>> ans, Set<Integer> up, Set<Integer> down, Set<Integer> x, Set<Integer> y,
