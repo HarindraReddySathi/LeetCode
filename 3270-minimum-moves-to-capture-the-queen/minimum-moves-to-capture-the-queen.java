@@ -6,20 +6,22 @@ class Solution {
         if((a==e&&a!=c)||(b==f&&b!=d)) return 1;
         if((bx==qx && bx!=hx)||(by==qy && by!=hy)) return 1;
         if(a==e && a==c){
-            System.out.println("***");
+            //System.out.println("***");
             if(!((b<f && d>b && d<f)||(b>f && d<b && d>f))) return 1;
+            return 2;
         }
         if(b==f && b==d){
-            System.out.println("*");
+            //System.out.println("*");
             if(!((a<e && c>a && c<e)||(a>e && c<a && c>e))) return 1;
+            return 2;
         }
         if(bx==qx && bx==hx){
-            System.out.println("###");
+            //System.out.println("###");
             if((by<qy && hy>by && hy<qy)||(by>qy && hy<by && hy>qy)) return 2;
             return 1;
         }
         if(by==qy && by==hy){
-            System.out.println("#");
+            //System.out.println("#");
             if((bx<qx && hx>bx && hx<qx)||(bx>qx && hx<bx && hx>qx)) return 2;
             return 1;
         }
