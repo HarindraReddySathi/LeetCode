@@ -4,9 +4,6 @@ class Solution {
         int[] memo = new int[2*n];
         //int zc=0;
         for(int i=0;i<n;i++){
-            if(gas[i]!=0 || cost[i]!=0){
-                 System.out.println(i+"---"+gas[i]+"--"+cost[i]);
-            }
             int k = gas[i]-cost[i];
             memo[i]=k;
             memo[n+i]=k;
