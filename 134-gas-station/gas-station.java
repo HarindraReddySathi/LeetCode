@@ -1,5 +1,5 @@
 class Solution {
-    public int canCompleteCircuit(int[] gas, int[] cost) {
+    /*public int canCompleteCircuit(int[] gas, int[] cost) {
         int n = gas.length;
         int[] memo = new int[2*n];
         //int zc=0;
@@ -29,5 +29,25 @@ class Solution {
             if(sum>=0 && j-i==n) return i;
         }
         return -1;
+    }*/
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        
+        int sum = 0;
+        for(int i=0;i<cost.length;i++){
+            gas[i] -= cost[i];
+            sum += gas[i];
+        }
+        if(sum<0)
+            return -1;
+        int total = 0;
+        int startIndex = 0;
+        for(int i=0;i<cost.length;i++){
+            total += gas[i];
+            if(total < 0){
+                total = 0;
+                startIndex = i + 1;
+            }
+        }
+        return startIndex;
     }
 }
