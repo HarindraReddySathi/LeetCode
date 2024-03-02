@@ -14,11 +14,6 @@ class Solution {
     public void DFS(int[] cookies,int[] cookieDec,int emptychild,int[] child,int[] ans,int k,int n,int level){
 
         if(level==n){
-            //System.out.println("*********");
-            /*for(int i=0;i<cookies.length;i++){
-                System.out.print(cookieDec[i]+"--");
-            }*/
-            //System.out.println();
             unfairnessCalculation(cookies,cookieDec,ans,k);
             return ;
         }
@@ -29,13 +24,10 @@ class Solution {
             cookieDec[level]=i;
             if(child[i]==0)emptychild--;
             child[i]++;
-            //int c= n-level;
-            //System.out.println(emptychild+"--"+c);
             if(!(emptychild>n-level-1))
             DFS(cookies,cookieDec,emptychild,child,ans,k,n,level+1);
             cookieDec[level]=-1;
             child[i]--;
-            if(child[i]==0)emptychild++;
         }
     }
 
@@ -45,10 +37,11 @@ class Solution {
         int max = Integer.MIN_VALUE;
         for(int i=0;i<cookies.length;i++){
             temp[cookieDec[i]]+=cookies[i];
+            if(temp[cookieDec[i]]>max)max=temp[cookieDec[i]];
         }
-        for(int i=0;i<k;i++){
+        /*for(int i=0;i<k;i++){
             if(temp[i]>max)max=temp[i];
-        }
+        }*/
         if(max<ans[0])ans[0]=max;
     }
 }
