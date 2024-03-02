@@ -28,6 +28,7 @@ class Solution {
             DFS(cookies,cookieDec,emptychild,child,ans,k,n,level+1);
             cookieDec[level]=-1;
             child[i]--;
+            if(child[i]==0)emptychild++;
         }
     }
 
@@ -37,7 +38,6 @@ class Solution {
         int max = Integer.MIN_VALUE;
         for(int i=0;i<cookies.length;i++){
             temp[cookieDec[i]]+=cookies[i];
-            //if(temp[cookieDec[i]]>max)max=temp[cookieDec[i]];
         }
         for(int i=0;i<k;i++){
             if(temp[i]>max)max=temp[i];
