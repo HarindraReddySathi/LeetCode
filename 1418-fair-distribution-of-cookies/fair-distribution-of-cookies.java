@@ -18,8 +18,6 @@ class Solution {
             return ;
         }
         
-       
-
         for(int i=0;i<k;i++){
             cookieDec[level]=i;
             if(child[i]==0)emptychild--;
