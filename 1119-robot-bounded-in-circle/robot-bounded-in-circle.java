@@ -1,4 +1,37 @@
 class Solution {
+
+
+   /* 
+   Always check this solution to exactly know how to repersent directions
+   class Solution {
+    public boolean isRobotBounded(String instructions) {
+        int dir[][] = {{0,1}, {-1, 0}, {0, -1}, {1,0}};
+        int i = 0;
+        int x = 0;
+        int y = 0;
+       
+        for(int s = 0; s < instructions.length(); s++){
+            if(instructions.charAt(s) == 'L'){
+                i = (i + 1) % 4;
+            }
+            else if(instructions.charAt(s) == 'R'){
+                i = (i + 3) % 4;
+            }
+            else{
+                x = x + dir[i][0];
+                y = y + dir[i][1];
+            }
+        }
+        return x == 0 && y == 0 || i != 0;
+    }
+}*/
+
+
+
+
+
+
+
     public boolean isRobotBounded(String instructions) {
         
         Map<Character,Map<Character,Character>> map = directionMapCreator();
@@ -24,35 +57,6 @@ class Solution {
         if(dir=='N') return false;
         return true;
 
-        /*if(y==0){
-            if((x>0 && dir=='E') || (x<0 && dir=='W')) return false;
-            return true;
-        }
-        if(x==0){
-            if((y>0 && dir=='N') || (y<0 && dir=='S')) return false;
-            return true;
-        }
-        //Q1
-        if(x>0 && y>0){
-            if(dir=='N') return false;
-            return true;
-        }
-        //Q4
-        if(x>0 && y<0){
-            if(dir=='S') return false;
-            return true;
-        }
-        //Q2
-        if(x<0 && y>0){
-            if(dir=='N') return false;
-            return true;
-        }
-        //Q3
-        if(x<0 && y<0){
-             if(dir=='S') return false;
-            return true;
-        }
-        return true;*/
     }
 
     public Map<Character,Integer[]> distanceEstimateCreator(){
