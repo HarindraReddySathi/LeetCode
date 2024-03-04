@@ -13,11 +13,9 @@ class Solution {
             for(Integer i : map.get(c)){
                 ans+=1l*(i+1);
                 ans+=1l*(i-start)*(start);
-                System.out.println((2*i+1-start));
                 start=i+1;
             }
             int k = map.get(c).get(map.get(c).size()-1);
-            //System.out.println((n-1-k)*(k+1));
             ans+=1l*(n-1-k)*(k+1);
         }
         return ans;
