@@ -24,17 +24,14 @@ class Solution {
         int dec = (left==right)?-1:0;
         
         while(left>=0 && right<n){
-            //System.out.println(left+"---"+right);
             if(ch[left]==ch[right]) ans++;
             else break;
             left--;right++;
         }
         ans*=2;ans+=dec;
         if((temp[1]-temp[0]+1)<ans){
-            //System.out.println(left+"---"+right+"****");
             temp[0]=left+1;
             temp[1]=right-1;
-            //System.out.println(temp[0]+"---"+temp[1]);
         }
     }
 }
