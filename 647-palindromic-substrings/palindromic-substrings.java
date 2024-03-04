@@ -19,7 +19,6 @@ class Solution {
     public int Case(char[] ch, int left,int right,int n){
         int ans =0;
         while(left>=0 && right<n){
-            System.out.println(left+"---"+right);
             if(ch[left--]==ch[right++]) ans++;
             else break;
         }
