@@ -9,7 +9,7 @@ class Solution {
         return -1;
     }*/
 
-    public int findDuplicate(int[] nums) {
+    /*public int findDuplicate(int[] nums) {
         // TC  O(N). SC - O(1) but array is modified
         int n = nums.length;
         for(int i=0;i<n;i++){
@@ -20,5 +20,15 @@ class Solution {
             }
         }
         return 0;
+    }*/
+
+    public int findDuplicate(int[] nums) {
+        //Cyclic Sort
+         while (nums[0] != nums[nums[0]]) {
+            int nxt = nums[nums[0]];
+            nums[nums[0]] = nums[0];
+            nums[0] = nxt;
+        }
+        return nums[0];
     }
 }
