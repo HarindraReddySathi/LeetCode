@@ -22,7 +22,7 @@ class Solution {
         return 0;
     }*/
 
-    public int findDuplicate(int[] nums) {
+    /*public int findDuplicate(int[] nums) {
         //Cyclic Sort
          while (nums[0] != nums[nums[0]]) {
             int nxt = nums[nums[0]];
@@ -30,5 +30,27 @@ class Solution {
             nums[0] = nxt;
         }
         return nums[0];
+    }*/
+
+    public int findDuplicate(int[] nums) {
+        
+        // Find the intersection point of the two runners.
+        int tortoise = nums[0];
+        int hare = nums[0];
+        
+        do {
+            tortoise = nums[tortoise];
+            hare = nums[nums[hare]];
+        } while (tortoise != hare);
+
+        // Find the "entrance" to the cycle.
+        tortoise = nums[0];
+        
+        while (tortoise != hare) {
+            tortoise = nums[tortoise];
+            hare = nums[hare];
+        }
+
+        return hare;
     }
 }
