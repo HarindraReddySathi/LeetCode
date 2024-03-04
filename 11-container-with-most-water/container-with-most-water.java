@@ -1,8 +1,8 @@
 class Solution {
 
-
+    // Two Pointer approach
     public int maxArea(int[] height) {
-
+        // TC-(N) SC-(1) 
         int n = height.length;
         int i =0;
         int j =n-1;
