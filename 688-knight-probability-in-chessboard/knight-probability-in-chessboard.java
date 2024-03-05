@@ -4,8 +4,9 @@ class Solution {
         //TC-O(k*N^2) SC(k*N^2)
         if (k == 0) return 1.0;
         int[][] dir = {{1,2},{-1,2},{2,1},{2,-1},{1,-2},{-2,-1},{-1,-2},{-2,1}};
-        double[][][] memo = new double[n][n][k + 1];
-        memo[row][column][0] = 1.0;
+        double[][] curmemo = new double[n][n];
+        double[][] prememo = new double[n][n];
+        prememo[row][column] = 1.0;
 
         for (int move = 1; move <= k; move++) {
             for (int i = 0; i < n; i++) {
@@ -15,18 +16,20 @@ class Solution {
                         int x = i + dir[d][0];
                         int y = j + dir[d][1];
                         if (x >= 0 && y >= 0 && x < n && y < n) {
-                            present += memo[x][y][move - 1];
+                            present += prememo[x][y];
                         }
                     }
-                    memo[i][j][move] = present / 8.0;
+                    curmemo[i][j] = present / 8.0;
                 }
             }
+            prememo=curmemo;
+            curmemo = new double[n][n];
         }
 
         double ans = 0.0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                ans += memo[i][j][k];
+                ans += prememo[i][j];
             }
         }                 
         return ans;
