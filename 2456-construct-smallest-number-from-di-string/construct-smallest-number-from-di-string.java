@@ -1,24 +1,41 @@
 class Solution {
     public String smallestNumber(String pattern) {
         
-        StringBuilder s = new StringBuilder("123456789".substring(0, pattern.length() + 1));
-        int j = 0;
-
-        for (int i = 0; i <= pattern.length(); i++) {
-            if (i < pattern.length() && pattern.charAt(i) == 'D') {
-                j++;
+        int n = pattern.length();
+        char[] ch = pattern.toCharArray();
+        int[] arr = new int[n+1];
+        for(int i=0;i<=n;i++)arr[i]=i+1;
+        int i=0;
+        int j=0;
+        while(i<n && j<n){
+            if(ch[i]=='I'){
+                i++;j++;
                 continue;
             }
-
-            if (j > 0) {
-                StringBuilder ns = new StringBuilder(s.substring(i - j, i + 1));
-                s.replace(i - j, i + 1, ns.reverse().toString());
+            while(j<n && ch[j]=='D'){
+                j++;
             }
-
-            j = 0;
+            //reverse string from i before j
+            reverse(arr,i,j);
+            i=j;
         }
+        StringBuilder sb = new StringBuilder();
+        for(i=0;i<=n;i++){
+            sb.append(arr[i]);
+        }
+        return sb.toString();
+    }
 
-        return s.toString();
+    public void reverse(int[] arr,int i,int j){
 
+        int start =i;
+        int end =j;
+        while(start<=end){
+            int temp = arr[start];
+            arr[start]=arr[end];
+            arr[end]=temp;
+            start++;
+            end--;
+        }
     }
 }
