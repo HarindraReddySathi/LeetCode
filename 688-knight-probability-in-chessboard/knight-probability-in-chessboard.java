@@ -1,6 +1,7 @@
 class Solution {
     public double knightProbability(int n, int k, int row, int column) {
-
+        // calculate the probability of each cell at each level
+        //TC-O(k*N^2) SC(k*N^2)
         if (k == 0) return 1.0;
         int[][] dir = {{1,2},{-1,2},{2,1},{2,-1},{1,-2},{-2,-1},{-1,-2},{-2,1}};
         double[][][] memo = new double[n][n][k + 1];
@@ -29,18 +30,5 @@ class Solution {
             }
         }                 
         return ans;
-    }
-
-    public void print(double[][][] memo,int k,int n){
-
-        for(int l=0;l<=k;l++){
-            System.out.println("********"+l+"******");
-            for(int i=0;i<n;i++){
-                for(int j=0;j<n;j++){
-                    System.out.print(memo[i][j][l]+"-");
-                }
-                System.out.println();
-            }
-        }
     }
 }
