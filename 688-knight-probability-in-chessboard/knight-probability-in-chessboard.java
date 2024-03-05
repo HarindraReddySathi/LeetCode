@@ -1,7 +1,7 @@
 class Solution {
     public double knightProbability(int n, int k, int row, int column) {
         // calculate the probability of each cell at each level
-        //TC-O(k*N^2) SC(k*N^2)
+        //TC-O(k*N^2) SC(2*N^2)
         if (k == 0) return 1.0;
         int[][] dir = {{1,2},{-1,2},{2,1},{2,-1},{1,-2},{-2,-1},{-1,-2},{-2,1}};
         double[][] curmemo = new double[n][n];
