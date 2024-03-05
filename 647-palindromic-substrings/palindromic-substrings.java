@@ -3,24 +3,27 @@ class Solution {
         
         int n = s.length();
         char[] ch = s.toCharArray();
-        int ans =1;
-        for(int i=1;i<n;i++){
-            ans+=findPalindromeCouunt(ch,i,n);
+        int ans =0;
+        // To Calculate odd length palindromes
+        for(int i=0;i<n;i++){
+            int j=i;
+            int k=i;
+            while(j>=0 && k<n && ch[j]==ch[k]){
+                ans++;
+                j--;
+                k++;
+            }
         }
-        return ans;
-    }
-
-    public int findPalindromeCouunt(char[] ch ,int i,int n){
-        int ans =0;
-        ans+=Case(ch,i,i,n);
-        ans+=Case(ch,i-1,i,n);
-        return ans;
-    }
-    public int Case(char[] ch, int left,int right,int n){
-        int ans =0;
-        while(left>=0 && right<n){
-            if(ch[left--]==ch[right++]) ans++;
-            else break;
+        // To Calculate even length palindromes
+        for(int i=1;i<n;i++){
+            if(ch[i]!=ch[i-1]) continue;
+            int j=i-1;
+            int k=i;
+            while(j>=0 && k<n && ch[j]==ch[k]){
+                ans++;
+                j--;
+                k++;
+            }
         }
         return ans;
     }
