@@ -1,29 +1,32 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
+
         int n = nums.length;
         List<List<Integer>> ans = new ArrayList<>();
-        boolean[] isUsed = new boolean[n];
-        int[] temp = new int[n];
-        permutations(ans,isUsed,temp,0,n,nums);
+        boolean[] isVisited = new boolean[n];
+        int[] comb = new int[n];
+        DFS(nums, n, ans, isVisited, comb, 0);
         return ans;
     }
 
-    public void permutations(List<List<Integer>> ans,boolean[] isUsed,int[] temp,int level,int n,int[] nums){
-        if(level==n){
-            List<Integer> subAns = new ArrayList<>();
-            for(int i:temp){
-                subAns.add(nums[i]);
-            }
-            ans.add(subAns);
-            return;
-        }
-        for(int i=0;i<n;i++){
-            if(!isUsed[i]){
-                temp[level]=i;
-                isUsed[i]=true;
-                permutations(ans,isUsed,temp,level+1,n,nums);
-                isUsed[i]=false;
-            }
-        }
+    public void DFS(int[] nums, int n, List<List<Integer>> ans,
+     boolean[] isVisited, int[] comb, int level){
+         if(level==n){
+             update(comb,ans);
+             return;
+         }
+         for(int i=0;i<n;i++){
+            if(isVisited[i]) continue;
+            isVisited[i]=true;
+            comb[level]=nums[i];
+            DFS(nums, n, ans, isVisited, comb, level+1);
+            isVisited[i]=false;
+         }
+    }
+
+    public void update(int[] comb,List<List<Integer>> ans){
+        List<Integer> l = new ArrayList<>();
+        for(int i:comb) l.add(i);
+        ans.add(l);
     }
 }
