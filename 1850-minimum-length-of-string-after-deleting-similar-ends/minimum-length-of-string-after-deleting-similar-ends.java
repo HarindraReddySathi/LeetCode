@@ -17,7 +17,6 @@ class Solution {
             }
             if(r==ch[j]) j--;
         }
-        System.out.println(j+"--"+i);
         return (j-i)+1;
     }
 }
