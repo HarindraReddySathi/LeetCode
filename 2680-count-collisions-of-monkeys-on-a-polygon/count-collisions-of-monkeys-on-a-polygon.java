@@ -1,24 +1,15 @@
 class Solution {
-
-    private static int max = 1000000007;
+    private static int mod = 1000000007;
     public int monkeyMove(int n) {
-         return (int) ((max + pow(n) - 2) % max);
+        return (int)(mod+pow(2,n)-2)%mod;
     }
-    private static long pow(int n) {
-		if (n == 1)
-			return 2;
-		if (n % 2 == 0) {
-			long half = pow(n / 2);
-			return (half * half) % max;
-		} else {
-			long half = pow(n / 2);
-			return ((half * half) % max) * 2 % max;
-		}
-	}
 
-     /*private int mod =1000000007;
-    public int monkeyMove(int n) {
-        double ways = Math.pow(2,n)%mod;
-        return (int)((ways-2)%mod);
-    }*/
+    public long pow(int base,int pow){
+        if(pow==0) return 1;
+        if(pow==1) return base;
+        long k = pow(base,pow/2);
+        k=(k*k)%mod;
+        if(pow%2!=0) k=(k*base) % mod;
+        return k;
+    }
 }
