@@ -1,18 +1,19 @@
 class Solution {
-    public int maxProfit(int[] p) {
+    public int maxProfit(int[] prices) {
         
-        int n = p.length;
-        int ans=0;
-        int dif =0;
-        for(int i=0;i<n-1;i++){
-            if(p[i]>p[i+1]){
-                ans+=dif;
-                dif=0;
-            }else{
-                dif+=p[i+1]-p[i];
+        int n =prices.length;
+        int ans = 0;
+        int temp=0;
+        int i=0;
+        int j=1;
+        while(i<n && j<n){
+            while(j<n && prices[j]>prices[j-1]){
+                j++;
             }
+            ans+=prices[j-1]-prices[i];
+            i=j;
+            j++;
         }
-        if(dif!=0)ans+=dif;
         return ans;
     }
 }
