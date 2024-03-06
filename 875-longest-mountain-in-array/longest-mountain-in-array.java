@@ -1,28 +1,30 @@
 class Solution {
-    public int longestMountain(int[] nums) {
-        int n =nums.length;
-        if(n<3) return 0;
-        Queue<Integer> q = new LinkedList<>();
-        for(int i=1;i<n-1;i++){
-            if(nums[i]>nums[i-1]&& nums[i]>nums[i+1]){
-                //System.out.println(i);
-                q.add(i);
-            } 
+    public int longestMountain(int[] arr) {
+        
+        int n = arr.length;
+        int[] prefix = new int[n];
+        int[] suffix = new int[n];
+        int count =0;
+        for(int i=1;i<n;i++){
+            if(arr[i]>arr[i-1]){
+                count++;
+                prefix[i]=count;
+            }else{
+                count=0;
+            }
         }
-        if(q.size()==0) return 0;
-        int ans =0;
-        while(!q.isEmpty()){
-            int cur = q.poll();
-            int cans = 3;
-            for(int i=cur-2;i>=0;i--){
-                if(nums[i]<nums[i+1])cans++;
-                else break;
+        count=0;
+        for(int i=n-2;i>=0;i--){
+            if(arr[i]>arr[i+1]){
+                count++;
+                suffix[i]=count;
+            }else{
+                count=0;
             }
-            for(int i=cur+2;i<n;i++){
-                if(nums[i]<nums[i-1])cans++;
-                else break;
-            }
-            if(cans>ans)ans=cans;
+        }
+        int ans = 0;
+        for(int i=0;i<n;i++){
+            if(prefix[i]!=0 && suffix[i]!=0) ans = Math.max(ans,prefix[i]+suffix[i]+1);
         }
         return ans;
     }
