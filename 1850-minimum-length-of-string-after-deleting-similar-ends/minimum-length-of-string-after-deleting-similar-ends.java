@@ -11,11 +11,10 @@ class Solution {
             while(i<j && ch[i]==l){
                 i++;
             }
-            char r = ch[j];
-            while(i<j && ch[j]==r){
+            if(i==j) return 0;
+            while(i<j && ch[j]==l){
                 j--;
             }
-            if(r==ch[j]) j--;
         }
         return (j-i)+1;
     }
