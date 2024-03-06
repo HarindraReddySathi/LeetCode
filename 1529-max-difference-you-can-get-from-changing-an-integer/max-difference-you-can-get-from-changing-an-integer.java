@@ -1,48 +1,57 @@
 class Solution {
     public int maxDiff(int num) {
         
-        char[] nums = Integer.toString(num).toCharArray();
+        char[] high = Integer.toString(num).toCharArray();
+        char[] low = Integer.toString(num).toCharArray();
+        int n = high.length;
 
-        char[] a = nums.clone();
-        char[] b = nums.clone();
-        char x = '*';
-        char y = '*';
-        char max = '9', min = '1';
-
-        // maximum character
-        if (nums[0] != '9')
-            x = nums[0];
-        else {
-            for (int i = 1; i < nums.length; i++) {
-                if (nums[i] != '9') {
-                    x = nums[i];
+        //high
+        char x ='$';
+        char y = '9';
+        if(high[0]!='9') x=high[0];
+        else{
+            for(int i=0;i<n;i++){
+                if(high[i]!='9'){
+                    x=high[i];
                     break;
                 }
             }
         }
+        if(x!='$'){
+            for(int i=0;i<n;i++){
+                if(high[i]==x) high[i]=y;
+            }
+        }
 
-        // minimum character
-        if (nums[0] != '1') {
-            min = '1';
-            y = nums[0];
-        } else {
-            for (int i = 1; i < nums.length; i++) {
-                if (nums[i] != '1' && nums[i] != '0') {
-                    min = '0';
-                    y = nums[i];
+        //Low
+        x ='$';
+        y = '0';
+        if(low[0]!='1'){
+            x=low[0];
+            y='1';
+        }
+        else{
+            for(int i=0;i<n;i++){
+                if(low[0]=='1' && low[i]!='0' && low[i]!='1'){
+                    x=low[i];
+                    break;
+                }
+                if(low[0]!='1' && low[i]!='0'){
+                    x=low[i];
                     break;
                 }
             }
         }
-
-        // Replacement
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == x)
-                a[i] = max;
-            if (nums[i] == y)
-                b[i] = min;
+        if(x!='$'){
+            for(int i=0;i<n;i++){
+                if(low[i]==x) low[i]=y;
+            }
         }
-        return Integer.parseInt(String.valueOf(a)) -
-                Integer.parseInt(String.valueOf(b));
+
+        /// Calculation
+        int h = Integer.parseInt(String.valueOf(high));
+        int l = Integer.parseInt(String.valueOf(low));
+        System.out.println(h+"--"+l);
+        return (h-l);
     }
 }
