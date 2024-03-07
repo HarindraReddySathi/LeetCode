@@ -10,6 +10,6 @@ class Solution {
                 r = m;
             }
         }
-        return nums[l];
+        return nums[r];
     }
 }
