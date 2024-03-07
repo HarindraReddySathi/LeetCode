@@ -21,7 +21,7 @@ class Solution {
     // Process the rest of the windows
     for (int i = k; i < n; i++) {
         // Remove elements from the deque which are out of the current window
-        if(!q.isEmpty() && q.peekFirst() == i - k) {
+        if(!q.isEmpty() && q.peekFirst() <= i - k) {
             q.pollFirst();
         }
         // Remove elements smaller than the current element from the deque
