@@ -1,6 +1,13 @@
 class Solution {
     public int consecutiveNumbersSum(int n) {
-        //int upperLimit = (int)Math.floor(n/2);
+        // if we write n as i consecutive nums starting from k
+        //k+(k+1)+....+(k+i-1)=n
+        //k*i+(0+1+.....+(i-1))=n
+        //k*i+(i*(i-1)/2)=n
+        //k=[n-(i*(i-1)/2)]/i
+        // so if [n-(i*(i-1)/2)]%i==0 there exists an interger k such that sum of
+        // i consecutive integers from k equals to n
+        //As we know i*(i-1)/2 <=n so we can check for this from i ==1 to max 
         int ans =0;
         double i=1;
         while(i<=n){
