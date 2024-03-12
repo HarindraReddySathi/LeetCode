@@ -13,14 +13,10 @@ class Solution {
         ListNode root = new ListNode(0);
         root.next = head;
         Map<Integer,ListNode> map = new HashMap<>();
-        //Map<Integer,Integer> prevSum = new HashMap<>();
         map.put(0,root);
-        //prevSum(0,0);
-        //int pos=0;
         int sum=0;
         while(head!=null){
             sum+=head.val;
-            //pos++;
             if(map.containsKey(sum)){
                 ListNode k = map.get(sum).next;
                 int temp = sum+k.val;
