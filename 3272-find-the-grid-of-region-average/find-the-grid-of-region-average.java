@@ -20,20 +20,15 @@ class Solution {
 
     public void findAvgIntensity(int i,int j,int[][]image,int[][]res,int[][]count,int threshold){
         int sum =0;
-        //System.out.println(i+"----"+j);
         for(int p=i;p<i+3;p++){
             for(int q = j;q<j+3;q++){
                 sum+=image[p][q];
                 if(p!=i+2 && q==j+2){
-                    //System.out.println(p+"$---$"+q);
                     int n1 = Math.abs(image[p+1][q]-image[p][q]);
-                    //System.out.println(n1);
                     if(n1>threshold) return;
                 }else if(p!=i+2){
-                    //System.out.println(p+"**"+q);
                     int n1 = Math.abs(image[p+1][q]-image[p][q]);
                     int n2 = Math.abs(image[p][q+1]-image[p][q]);
-                    //System.out.println(n1+"$---$"+n2);
                     if(n1>threshold || n2>threshold) return;
                 }else if(p==i+2 && q!=j+2){
                     int n2 = Math.abs(image[p][q+1]-image[p][q]);
@@ -41,7 +36,6 @@ class Solution {
                 }
             }
         }
-        //System.out.println(i+"----"+j+"--"+sum);
         sum=sum/9;
         for(int p=i;p<i+3;p++){
             for(int q = j;q<j+3;q++){
