@@ -1,6 +1,6 @@
 class Solution {
     public long maxKelements(int[] nums, int k) {
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a,b) -> b-a);
         for(int i :nums){
             maxHeap.offer(i);
         }
