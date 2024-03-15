@@ -7,9 +7,10 @@ class Solution {
         }
         long ans =0;
         for(int i=0;i<k;i++){
-            double p = maxHeap.poll();
+            int p = maxHeap.poll();
             ans+=p;
-            maxHeap.add((int)Math.ceil(p/3));
+            int dec = (p%3==0)?0:1;
+            maxHeap.add(p/3+dec);
         }
         return ans;
     }
