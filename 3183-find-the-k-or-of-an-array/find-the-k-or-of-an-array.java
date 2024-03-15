@@ -4,8 +4,8 @@ class Solution {
         for(int i : nums){
             int pos =0;
             while(i>0){
-                bit[pos++]+=i%2;
-                i=i/2;
+                bit[pos++]+=i&1;
+                i=i>>1;
             }
         }
         for(int i=0;i<31;i++){
