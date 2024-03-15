@@ -14,13 +14,6 @@ class Solution {
                 d2++;
             w2[c - 'a']++;
         }
-        /*if(d1==d2){
-            int count=0;
-            for(int i =0;i<26;i++){
-                if((w1[i]>0 && w2[i]>0)|| (w1[i]==0 && w2[i]==0))count++;
-            }
-            if(count==26) return true;
-        }*/
         if(d1<d2){
             return finder(w2,d2,w1,d1);
         }else{
