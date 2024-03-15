@@ -1,7 +1,7 @@
 class Solution {
     public boolean makeStringsEqual(String s, String target) {
         
-        if(s.equals(target)) return true;
+        //if(s.equals(target)) return true;
         char[] ch1 = s.toCharArray();
         char[] ch2 = target.toCharArray();
         int n = s.length();
@@ -13,6 +13,7 @@ class Solution {
             if(ch1[i]=='1' && ch2[i]=='0') down++;
             if(up >0 && down >0) return true;
         }
+        if(up==0 && down==0) return true;
         return false;
     }
 }
