@@ -5,7 +5,7 @@ class Solution {
         int i=0,j=0;
         Map<Integer,Integer> map = new HashMap<>();
         int pair = 0;
-        while(i<n && j<n){
+        while(j<n){
             int p = nums[j];
             map.put(p,map.getOrDefault(p,0)+1);
             pair+= (map.get(p)-1);
