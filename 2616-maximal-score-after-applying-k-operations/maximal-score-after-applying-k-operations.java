@@ -9,8 +9,8 @@ class Solution {
         for(int i=0;i<k;i++){
             int p = maxHeap.poll();
             ans+=p;
-            int dec = (p%3==0)?0:1;
-            maxHeap.add(p/3+dec);
+            //int dec = (p%3==0)?0:1;
+            maxHeap.add((p+2)/3);
         }
         return ans;
     }
