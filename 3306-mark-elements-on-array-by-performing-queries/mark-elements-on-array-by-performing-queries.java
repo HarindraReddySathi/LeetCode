@@ -20,8 +20,11 @@ class Solution {
                 isMarked[pos]=true;
                 sum-=nums[pos];
             }
-            Set<Integer> s = map.keySet();
-            for(Integer i : s){
+            List<Integer> l = new ArrayList<>();
+            for(Integer i : map.keySet()){
+                l.add(i);
+            }
+            for(Integer i : l){
                 while(count!=0 && map.get(i).size()!=0){
                     Queue<Integer> q = map.get(i);
                     int k = q.poll();
@@ -31,7 +34,7 @@ class Solution {
                         count--;
                     }
                 }
-                //if(map.get(i).size()==0)map.remove(i);
+                if(map.get(i).size()==0)map.remove(i);
                 if(count==0) break;
             }
             ans[cur++]=sum;
