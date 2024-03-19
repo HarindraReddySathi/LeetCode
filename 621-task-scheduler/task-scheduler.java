@@ -13,12 +13,13 @@ class Solution {
                 mc++;
             }
         }
-        sum-=(max*mc);
-        //System.out.println(max+"--"+mc+"---"+sum+"--"+del);
+        int ans = max*mc;
+        sum-=(ans);
         int idle = (max-1)*n;
-        idle = (idle-(max-1)*(mc-1)>0)?idle-(max-1)*(mc-1):0;
+        int dec = idle-(max-1)*(mc-1);
+        idle = (dec>0)?dec:0;
         idle = (sum>idle)?sum:idle;
-        int ans = max*mc+idle;
+        ans +=idle;
         return ans;
     }
 }
