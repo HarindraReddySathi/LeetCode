@@ -10,8 +10,8 @@
  */
 class Solution {
     public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
-        ListNode root = new ListNode(-1);
-        root.next = list1;
+        ListNode root = list1;
+        //root.next = list1;
         int pos=0;
         while(pos!=a-1){
             list1=list1.next;
@@ -29,6 +29,6 @@ class Solution {
             start=start.next;
         }
         start.next=end;
-        return root.next;
+        return root;
     }
 }
