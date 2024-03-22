@@ -12,6 +12,7 @@ class Solution {
     public boolean isPalindrome(ListNode head) {
         ListNode root = head;
 
+        // Finding Mid
         ListNode slow = head;
         ListNode fast = head;
         while(fast.next!=null && fast.next.next!=null){
@@ -19,6 +20,7 @@ class Solution {
             fast=fast.next.next;
         }
 
+        // Reversing all the elements starting from MID
         ListNode cur = slow.next;
         ListNode prev = null;
 
@@ -29,6 +31,7 @@ class Solution {
             cur=temp;
         }
 
+        // Checking whether it is a palindrome or not
         while(prev!=null){
             if(root.val!=prev.val) return false;
             root=root.next;
