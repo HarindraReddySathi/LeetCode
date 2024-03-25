@@ -10,8 +10,7 @@ class Solution {
         }
         for(int i=0;i<n;i++){
             char[] ch = wordsQuery[i].toCharArray();
-            int p = dummy.pos;
-            if(dummy.child[ch[ch.length-1]-'a']!=null) p = dummy.search(ch,0,ch.length);
+            int p = dummy.search(ch,0,ch.length);
             ans[i]=p;
         }
         return ans;
