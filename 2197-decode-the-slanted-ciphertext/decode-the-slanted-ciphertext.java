@@ -26,6 +26,7 @@ class Solution {
             }
         }
         //System.out.println(sb.toString().replaceFirst("\\s++$", ""));
-        return sb.toString().replaceFirst("\\s++$", "");
+        //return sb.toString().replaceFirst("\\s++$", "");
+        return sb.toString().stripTrailing();
     }
 }
