@@ -5,7 +5,6 @@ class Solution {
         for(int[] d : dig) A[d[0]][d[1]] = true;
 
         int ans =0;
-        int k = artifacts.length;
         for(int[] cur : artifacts){
             boolean dec = true;
             for(int j=cur[0];j<=cur[2];j++){
