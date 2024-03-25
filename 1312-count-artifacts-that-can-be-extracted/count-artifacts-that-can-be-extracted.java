@@ -9,12 +9,8 @@ class Solution {
             boolean dec = true;
             for(int j=cur[0];j<=cur[2];j++){
                 for(int l=cur[1];l<=cur[3];l++){
-                    if(!A[j][l]){
-                        dec = false;
-                        break;
-                    }
+                    if(!A[j][l]) dec = false;
                 }
-                if(!dec) break;
             }
             if(dec)ans++;
         }
