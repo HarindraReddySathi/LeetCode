@@ -22,10 +22,10 @@ class Solution {
             System.out.println();
             for(int j=0;j<size;j++){
                 int k = l.get(j);
-                System.out.println(k+"----"+j+"---"+prefix[j]+"---"+suffix[j]);
+                //System.out.println(k+"----"+j+"---"+prefix[j]+"---"+suffix[j]);
                 ans[k]= (1l*j*k-prefix[j])+(suffix[j]-1l*(size-j-1)*k);
             }
-            System.out.println("----");
+            //System.out.println("----");
         }
         return ans;
     }
