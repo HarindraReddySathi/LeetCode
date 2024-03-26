@@ -1,30 +1,21 @@
 class Solution {
-
-    private static int mod = 1000000000+7;
     public int peopleAwareOfSecret(int n, int delay, int forget) {
         
-        Map<Integer,Long> outspoken = new HashMap<>();
-        Map<Integer,Long> forgot = new HashMap<>();
+        if(delay==n-1) return 2;
+        long mod = 1000000007L;
+        long[] shares = new long[n + 1];
+        long[] forgets = new long[n + 1];
         long ans =1;
-        int cur=1;
         long speaking = 0;
-        outspoken.put(cur+delay,1l);
-        forgot.put(cur+forget,1l);
-        cur++;
-        while(cur<=n){
-            if(forgot.containsKey(cur)){
-                speaking-=forgot.get(cur);
-                ans -=forgot.get(cur);
-            }
-            if(outspoken.containsKey(cur)){
-                speaking+=outspoken.get(cur)%mod;
-            }
-            if(speaking!=0){
-                outspoken.put(cur+delay,speaking%mod);
-                forgot.put(cur+forget,speaking%mod);
-            }
-            ans +=speaking%mod;
-            cur++;
+        if(delay<n)shares[1+delay]=1;
+        if(forget<n)forgets[1+forget]=1;
+        for(int i = (delay);i<=n;i++){
+            speaking+=shares[i]%mod;
+            speaking-=forgets[i]%mod;
+            ans-=forgets[i]%mod;
+            ans+=speaking%mod;
+            if(i+delay<n+1)shares[delay+i]+=speaking%mod;
+            if(i+forget<n+1)forgets[i+forget]+=speaking%mod;
         }
         return (int)(ans%mod);
     }
