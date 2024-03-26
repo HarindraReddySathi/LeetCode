@@ -14,7 +14,7 @@ class Solution {
         while(cur<=n){
             if(forgot.containsKey(cur)){
                 speaking-=forgot.get(cur)%mod;
-                ans -=forgot.get(cur)%mod;
+                ans -=forgot.get(cur);
             }
             if(outspoken.containsKey(cur)){
                 speaking+=outspoken.get(cur)%mod;
