@@ -13,7 +13,7 @@ class Solution {
         cur++;
         while(cur<=n){
             if(forgot.containsKey(cur)){
-                speaking-=forgot.get(cur)%mod;
+                speaking-=forgot.get(cur);
                 ans -=forgot.get(cur);
             }
             if(outspoken.containsKey(cur)){
