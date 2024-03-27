@@ -7,7 +7,6 @@ class Solution {
         int end = start+k-1;
         while(start<n){
             reverse(ch,start,end,n);
-            //System.out.println(start+"--"+end);
             start = end+k+1;
             end =start+k-1;
         }
