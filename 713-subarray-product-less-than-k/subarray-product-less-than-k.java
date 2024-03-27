@@ -7,21 +7,15 @@ class Solution {
         int j=0;
         int n = nums.length;
         while(i<n){
-
             while(j<n && product<k){
                product*=nums[j];
                j++; 
             }
-            //if(product==k) j--;
             if(product>=k)ans+=(j-i-1);
             else ans+=(j-i);
             product/=nums[i];
             i++;
         }
-        /*while(i<n){
-             ans+=(j-i-1);
-             i++;
-        }*/
         return ans;
     }
 }
