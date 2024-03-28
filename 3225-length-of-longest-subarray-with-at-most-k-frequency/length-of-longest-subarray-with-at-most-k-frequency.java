@@ -10,7 +10,7 @@ class Solution {
                 j++;
             }
             ans = Math.max(ans,(j-i));
-            map.put(nums[i],map.getOrDefault(nums[i],0)-1);
+            map.put(nums[i],map.get(nums[i])-1);
             i++;
         }
         return ans;
