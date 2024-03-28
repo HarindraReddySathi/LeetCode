@@ -4,7 +4,7 @@ class Solution {
         int n = nums.length;
         int i=0;int j=0;
         int ans =0;
-        while(i<n && j<n){
+        while(j<n){
             while(j<n && (!map.containsKey(nums[j]) || map.get(nums[j])<k)){
                 map.put(nums[j],map.getOrDefault(nums[j],0)+1);
                 j++;
