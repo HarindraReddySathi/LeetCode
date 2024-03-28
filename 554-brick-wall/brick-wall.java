@@ -9,7 +9,7 @@ class Solution {
             int size =0;
             int end = l.size()-1;
             for(Integer i : l){
-                if(size==end) continue;
+                if(size==l.size()-1) continue;
                 sum+=i;
                 int val = map.getOrDefault(sum,0)+1;
                 map.put(sum,val);
