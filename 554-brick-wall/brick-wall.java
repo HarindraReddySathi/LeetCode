@@ -11,8 +11,9 @@ class Solution {
             for(Integer i : l){
                 if(size==end) continue;
                 sum+=i;
-                map.put(sum,map.getOrDefault(sum,0)+1);
-                max = Math.max(max,map.get(sum));
+                int val = map.getOrDefault(sum,0)+1;
+                map.put(sum,val);
+                if(max<val)max=val;
                 size++;
             }
         }
