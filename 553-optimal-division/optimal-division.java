@@ -1,10 +1,10 @@
 class Solution {
     public String optimalDivision(int[] nums) {
         int n = nums.length;
-        if(n==1) return String.valueOf(nums[0]);
-        if(n==2) return String.valueOf(nums[0])+"/"+String.valueOf(nums[1]);
         StringBuilder sb = new StringBuilder();
-        sb.append(String.valueOf(nums[0]));
+        sb.append(nums[0]);
+        if(n==1) return sb.toString();
+        if(n==2) return sb.append("/").append(nums[1]).toString();
         sb.append("/(");
         for(int i=1;i<n-1;i++){
             sb.append(String.valueOf(nums[i]));
