@@ -5,12 +5,9 @@ class Solution {
         sb.append(nums[0]);
         if(n==1) return sb.toString();
         if(n==2) return sb.append("/").append(nums[1]).toString();
-        sb.append("/(");
-        for(int i=1;i<n-1;i++){
-            sb.append(String.valueOf(nums[i]));
-            sb.append("/");
-        }
-        sb.append(String.valueOf(nums[n-1]));
+        sb.append("/(").append(nums[1]);
+        for(int i=2;i<n;i++)
+            sb.append("/").append(String.valueOf(nums[i]));
         sb.append(")");
         return sb.toString();
     }
