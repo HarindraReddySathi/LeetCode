@@ -8,7 +8,6 @@ class Solution {
         long ans =0;
         int count=0;
         for(int i=0;i<n;i++){
-
             while(j<n && count<k){
                 if(nums[j++]==max) count++;
             }
