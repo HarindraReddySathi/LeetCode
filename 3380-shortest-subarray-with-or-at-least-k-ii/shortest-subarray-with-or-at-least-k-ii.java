@@ -24,14 +24,11 @@ class Solution {
     }
 
     public int update(int cur,int p,int IorD,int[] count){
-        //System.out.println(p+" -- " +cur);
         int fac =1;
         int stage=0;
         while(stage<31){
             int curbit = p&1;
-            //if(IorD==0) System.out.println(curbit);
             if(curbit==1){
-                //if(IorD==0)System.out.println("**"+count[stage]);
                 if(IorD==0 && count[stage]==0) cur+=fac;
                 if(IorD==0)   count[stage]++;
                 if(IorD==1)count[stage]--;
