@@ -9,7 +9,7 @@ class Solution {
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(b[i][j]==ch[0]){
-                    if(DFS(b,ch,dec,0,i,j,m,n,o)) return true;;
+                    if(DFS(b,ch,dec,0,i,j,m,n,o)) return true;
                 }
             }
         }
