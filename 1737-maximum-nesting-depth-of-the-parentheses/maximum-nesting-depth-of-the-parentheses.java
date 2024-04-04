@@ -4,9 +4,10 @@ class Solution {
         char[] ch = s.toCharArray();
         int n = ch.length;
         for(char c : ch){
-            if(c=='(') count++;
-            if(c==')') count--;
-            if(c=='(' || c==')') ans = Math.max(count,ans);
+            if(c=='('){
+                count++;
+                ans = Math.max(count,ans);
+            }else if(c==')') count--;
         }
         return ans;
     }
