@@ -4,8 +4,8 @@ class Solution {
         int n = grid[0].length;
         for(int i=0;i<m;i++){
             boolean dec = true;
-            for(int j=0;j<n;j++){
-                if(i!=j && grid[i][j]==0){
+            for(int j=i+1;j<n;j++){
+                if(grid[i][j]==0){
                     dec = false;
                     break;
                 }
