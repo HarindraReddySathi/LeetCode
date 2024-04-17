@@ -9,7 +9,7 @@ class Solution {
                 i=i>>1;
                 if(i!=0) temp++;
             }
-            mul = Math.max(mul,temp);
+            if(temp>mul) mul = temp;
         }
         return mul+add;
     }
