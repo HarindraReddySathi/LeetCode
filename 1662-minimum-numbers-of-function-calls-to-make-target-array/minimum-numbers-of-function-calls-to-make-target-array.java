@@ -1,16 +1,12 @@
 class Solution {
     public int minOperations(int[] nums) {
-        int mul = 0;
-        int add = 0;
-        for(int i : nums){
-            int temp =0;
-            while(i>0){
-                if(i%2!=0) add++;
-                i=i>>1;
-                if(i!=0) temp++;
-            }
-            if(temp>mul) mul = temp;
+        int ans = 0;
+        int mx = 0;
+        for (int v : nums) {
+            mx = Math.max(mx, v);
+            ans += Integer.bitCount(v);
         }
-        return mul+add;
+        ans += Integer.toBinaryString(mx).length() - 1;
+        return ans;
     }
 }
