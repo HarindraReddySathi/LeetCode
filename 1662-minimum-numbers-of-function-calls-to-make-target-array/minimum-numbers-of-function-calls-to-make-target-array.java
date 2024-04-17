@@ -6,7 +6,7 @@ class Solution {
             int temp =0;
             while(i>0){
                 if(i%2!=0) add++;
-                i=i/2;
+                i=i>>1;
                 if(i!=0) temp++;
             }
             mul = Math.max(mul,temp);
