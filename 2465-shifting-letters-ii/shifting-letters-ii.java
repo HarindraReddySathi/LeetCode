@@ -2,7 +2,6 @@ class Solution {
     public String shiftingLetters(String s, int[][] shifts) {
         
         int n = s.length();
-        System.out.println(n);
         int[] shift = new int[n];
         char[] ch = s.toCharArray();
         for(int[] i : shifts){
@@ -12,9 +11,6 @@ class Solution {
         }
         for(int i=1;i<n;i++){
             shift[i] = shift[i]+shift[i-1];
-        }
-        for(int i=0;i<n;i++){
-            System.out.println(shift[i]);
         }
         for(int i=0;i<n;i++){
             int dec = shift[i]>=0 ?1 :-1;
