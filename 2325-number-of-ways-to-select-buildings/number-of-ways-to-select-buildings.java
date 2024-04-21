@@ -4,7 +4,6 @@ class Solution {
         int n = s.length();
         char[] ch = s.toCharArray();
         int[] build = new int[2];
-        int[] suffix = new int[n];
         if(ch[n-1]=='1')build[1]++;
         if(ch[n-1]=='0')build[0]++;
         long ans =0;
