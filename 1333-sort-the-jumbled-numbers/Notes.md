@@ -1,1 +1,1 @@
-<h2>sort-the-jumbled-numbers Notes</h2><hr>[ Time taken: 16 m 34 s ]
+<h2>sort-the-jumbled-numbers Notes</h2><hr>[ Time taken: 8 m 22 s ]
