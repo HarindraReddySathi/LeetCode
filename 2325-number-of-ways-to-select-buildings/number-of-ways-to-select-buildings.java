@@ -13,17 +13,13 @@ class Solution {
             suffix[i]= build[dec];
             build[inc]++;
         }
-        long[][] memo = new long[n][2];
+        long ans =0;
+        long[] memo = new long[2];
         for(int i =n-2;i>=0;i--){
             int dec = ch[i]=='0' ? 0:1;
             int inc = ch[i]=='0' ? 1:0;
-            memo[i][dec]=memo[i+1][dec]+suffix[i];
-            memo[i][inc]=memo[i+1][inc];
-        }
-        long ans =0;
-        for(int i=0;i<n-1;i++){
-            int inc = ch[i]=='0' ? 1:0;
-            ans+=memo[i+1][inc];
+            ans+=memo[inc];
+            memo[dec]+=suffix[i];
         }
         return ans;
     }
