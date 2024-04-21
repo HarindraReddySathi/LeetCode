@@ -1,12 +1,12 @@
 class Solution {
     public boolean divideArray(int[] nums) {
         
-        Map<Integer,Integer> map = new HashMap<>();
+        int[] arr = new int[501];
         for(int i : nums){
-            map.put(i,map.getOrDefault(i,0)+1);
+            arr[i]++;
         }
-        for(int i : map.keySet()){
-            if(map.get(i)%2!=0) return false;
+        for(int i=1;i<=500;i++){
+            if(arr[i]%2!=0) return false;
         }
         return true;
     }
