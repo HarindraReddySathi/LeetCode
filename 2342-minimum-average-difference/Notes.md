@@ -1,0 +1,1 @@
+<h2>minimum-average-difference Notes</h2><hr>[ Time taken: 17 m 51 s ]
