@@ -20,19 +20,6 @@ class Solution {
             memo[i][dec]=memo[i+1][dec]+suffix[i];
             memo[i][inc]=memo[i+1][inc];
         }
-
-        /*for(int i=0;i<n;i++){
-            System.out.print(suffix[i]+" -- ");
-        }
-        System.out.println();
-        for(int i=0;i<n;i++){
-            System.out.print(memo[i][0]+" -- ");
-        }
-        System.out.println();
-        for(int i=0;i<n;i++){
-            System.out.print(memo[i][1]+" -- ");
-        }*/
-
         long ans =0;
         for(int i=0;i<n-1;i++){
             int inc = ch[i]=='0' ? 1:0;
