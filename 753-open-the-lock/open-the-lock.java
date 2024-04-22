@@ -24,7 +24,6 @@ class Solution {
                         else cur[j]--;
                         continue;
                     }
-                    System.out.println(c);
                     if(c.equals(target)) return level;
                     set.add(c);
                     q.add(c);
@@ -40,7 +39,6 @@ class Solution {
                         else cur[j]++;
                         continue;
                     }
-                    System.out.println(c);
                     if(c.equals(target)) return level;
                     set.add(c);
                     q.add(c);
