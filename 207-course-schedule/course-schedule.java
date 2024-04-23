@@ -1,7 +1,8 @@
 class Solution {
 
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-         int[] incoming = new int[numCourses];
+        
+        int[] incoming = new int[numCourses];
         Map<Integer, List<Integer>> map = new HashMap<>();
         for (int[] prerequisite : prerequisites) {
             map.computeIfAbsent(prerequisite[1], l -> new ArrayList<>()).add(prerequisite[0]);
@@ -15,10 +16,10 @@ class Solution {
             }
         }
         
-        int count = 0; // Tracks the number of courses processed
+        int count = 0;
         while (!queue.isEmpty()) {
             int current = queue.poll();
-            count++; // Increment processed courses
+            count++;
             if (!map.containsKey(current)) continue;
             for (int nextCourse : map.get(current)) {
                 incoming[nextCourse]--;
