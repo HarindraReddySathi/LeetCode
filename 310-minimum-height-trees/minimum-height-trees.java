@@ -18,16 +18,13 @@ class Solution {
         Queue<Integer> q = new LinkedList<>();
         int count = n;
         for(int i=0;i<n;i++){
-            //System.out.println(i+" -- "+isVisited[i]);
             if(isVisited[i]==1){
                 q.add(i);
                 isVisited[i]--;
                 count--;
-                //System.out.println(i);
             }
         }
-        while(!q.isEmpty()){
-            if(count==0) break;
+        while(!q.isEmpty() && count>0){
             int size = q.size();
             for(int j =0;j<size;j++){
                 int cur = q.poll();
