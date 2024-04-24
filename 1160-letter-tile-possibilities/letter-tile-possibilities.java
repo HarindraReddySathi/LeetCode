@@ -1,62 +1,18 @@
 class Solution {
-
-    public int[] facts = {1,1,2,6,24,120,720,5040};
     public int numTilePossibilities(String tiles) {
-
-        int[] ans = new int[1];
-        int n = tiles.length();
-        int[] chars = getDistictCharsCount(tiles);
-        getAnswerBelow3(ans,chars,n);
-        int[] a = new int[chars.length];
-        for(int i=3;i<=n;i++){
-            int prev = ans[0];
-            backTrack(a,chars,0,i,i,ans);
-        }
-        return ans[0];
+        Set<String> set = new HashSet<>();
+        boolean[] map = new boolean[tiles.length()];
+        rec(tiles, "", set, map);
+        return set.size()-1;
     }
-
-    public void backTrack(int[] a,int[] chars,int charPos,int maxSize,int size,int[] ans){
-
-        if(maxSize==0){
-            int temp = facts[size];
-            for(int i=0;i<a.length;i++){
-                temp /= facts[a[i]];
+    public void rec(String tiles, String ans, Set<String> set, boolean[] map){
+        set.add(ans);
+        for(int i=0; i<tiles.length(); i++){
+            if(map[i]==false){
+                map[i]=true;
+                rec(tiles, ans+tiles.charAt(i), set, map);
+                map[i]=false;
             }
-            ans[0]+=temp;
-            return;
-        }
-        if(charPos==chars.length) return;
-        for(int i =0;i<=Math.min(chars[charPos],maxSize);i++){
-            a[charPos] = i;
-            backTrack(a,chars,charPos+1,maxSize-i,size,ans);
-            a[charPos] = 0;
-        }
-    }
-
-    public void getAnswerBelow3(int[] ans,int[] chars,int n){
-        ans[0]= chars.length;
-        if(n==1) return;
-        int distinct = chars.length;
-        ans[0] += (distinct*(distinct-1)/2)*facts[2];
-        for(int i : chars)if(i>=2) ans[0]++;
-    }
-
-    public int[] getDistictCharsCount(String tiles){
-
-        int[] alpha = new int[26];
-        char[] ch = tiles.toCharArray();
-        int distinct =0;
-        for(char c : ch){
-            if(alpha[c-'A']==0)distinct++;
-            alpha[c-'A']++;
-        }
-        int[] chars = new int[distinct];
-        int cur =0;
-        for(int i=0;i<26;i++){
-            if(alpha[i]!=0){
-                chars[cur++]=alpha[i];
-            }
-        }
-        return chars;
+        }   
     }
 }
