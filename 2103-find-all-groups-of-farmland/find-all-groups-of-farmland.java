@@ -36,20 +36,13 @@ class Solution {
             else grid[x][j] =-1;
             x++;
         }
-        int y = j+1;
+        int y = j;
         while(y<n){
             if(grid[i][y]==0)break;
             y++;
         }
         l.add(x-1);l.add(y-1);
         if(y==n) return;
-        grid[i][y]=-1;
-        //System.out.print(i+" ** "+y);
-        
-        x-=1;
-        while(x>=i){
-            grid[x][y]=-1;
-            x--;
-        }
+        while(--x>=i) grid[x][y]=-1;
     }
 }
