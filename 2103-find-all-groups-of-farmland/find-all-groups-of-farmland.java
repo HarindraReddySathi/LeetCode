@@ -3,7 +3,6 @@ class Solution {
         
         int m = land.length;
         int n = land[0].length;
-        boolean[][] isVisited = new boolean[m][n];
         List<List<Integer>> ans = new ArrayList<>();
         for(int i=0;i<m;i++){
             boolean dec = true;
@@ -14,7 +13,6 @@ class Solution {
                     marking(land,i,j,l,m,n);
                     ans.add(l);
                     dec = false;
-                    //for(int p : land[0])System.out.print(p+" -- ");
                 }else if(land[i][j]==-1) dec = !dec;
             }
         }
