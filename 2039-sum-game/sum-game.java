@@ -8,7 +8,7 @@ class Solution {
             int pos = (i<n/2) ?0:1;
             if(ch[i]=='?')q[pos]++;
             else{
-                sum[pos]+=Integer.parseInt(String.valueOf(ch[i]));
+                sum[pos]+=ch[i]-'0';
             }
         }
         if((sum[0]>sum[1] && q[0]>q[1])||(sum[1]>sum[0] && q[1]>q[0])) return true;
