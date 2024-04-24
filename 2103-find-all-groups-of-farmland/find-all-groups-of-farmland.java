@@ -3,25 +3,23 @@ class Solution {
         
         int m = land.length;
         int n = land[0].length;
-        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
         for(int i=0;i<m;i++){
             boolean dec = true;
             for(int j=0;j<n;j++){
                 if( land[i][j]==1 && dec){
-                    List<Integer> l = new ArrayList<>();
-                    l.add(i);l.add(j);
-                    marking(land,i,j,l,m,n);
-                    ans.add(l);
+                    ans.add(i);ans.add(j);
+                    marking(land,i,j,ans,m,n);
                     dec = false;
                 }else if(land[i][j]==-1) dec = !dec;
             }
         }
-        int[][] res = new int[ans.size()][4];
-        for(int i=0;i<ans.size();i++){
-            res[i][0]=ans.get(i).get(0);
-            res[i][1]=ans.get(i).get(1);
-            res[i][2]=ans.get(i).get(2);
-            res[i][3]=ans.get(i).get(3);
+        int[][] res = new int[ans.size()/4][4];
+        for(int i=0,j=0;i<ans.size();i=i+4,j++){
+            res[j][0]=ans.get(i+0);
+            res[j][1]=ans.get(i+1);
+            res[j][2]=ans.get(i+2);
+            res[j][3]=ans.get(i+3);
         }
         return res;
     }
