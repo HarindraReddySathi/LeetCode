@@ -4,8 +4,9 @@ class Solution {
         int[] sum = new int[2];
         int[] q = new int[2];
         char[] ch = num.toCharArray();
+        int half = n/2;
         for(int i =0;i<n;i++){
-            int pos = (i<n/2) ?0:1;
+            int pos = (i<half) ?0:1;
             if(ch[i]=='?')q[pos]++;
             else{
                 sum[pos]+=ch[i]-'0';
