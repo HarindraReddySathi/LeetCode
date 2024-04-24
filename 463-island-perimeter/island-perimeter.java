@@ -10,7 +10,7 @@ class Solution {
                     for(int[] k : dir){
                         int x = i+k[0];
                         int y = j+k[1];
-                        if(x>=0 && y>=0 && x<m && y<n){
+                        if(x>=0 && y>=0 && x<m && y<n ){
                             if(grid[x][y]==0) perimeter++;
                         }else{
                             perimeter++;
