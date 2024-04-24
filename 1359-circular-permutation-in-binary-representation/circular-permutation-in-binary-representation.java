@@ -3,7 +3,7 @@ class Solution {
         List<Integer> ans = new ArrayList<>();
         int end = 1<<n;
         for(int i=0;i<end;i++){
-            ans.add((i^(i>>1))^start);
+            ans.add(start^i^i>>1);
         }
         return ans;
     }
