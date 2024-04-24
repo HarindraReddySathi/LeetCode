@@ -6,16 +6,16 @@ class Solution {
         boolean[][] isVisited = new boolean[m][n];
         List<List<Integer>> ans = new ArrayList<>();
         for(int i=0;i<m;i++){
+            boolean dec = true;
             for(int j=0;j<n;j++){
-                if( land[i][j]==1 && !isVisited[i][j]){
+                if( land[i][j]==1 && dec){
                     List<Integer> l = new ArrayList<>();
                     l.add(i);l.add(j);
-                    int[] br = new int[2];
-                    br[0]=i;br[1]=j;
-                    DFS(br,land,isVisited,i,j,m,n);
-                    l.add(br[0]);l.add(br[1]);
+                    marking(land,i,j,l,m,n);
                     ans.add(l);
-                }
+                    dec = false;
+                    //for(int p : land[0])System.out.print(p+" -- ");
+                }else if(land[i][j]==-1) dec = !dec;
             }
         }
         int[][] res = new int[ans.size()][4];
@@ -27,17 +27,29 @@ class Solution {
         }
         return res;
     }
+    public void marking(int[][] grid,int i,int j,List<Integer> l,int m,int n){
 
-    public void DFS(int[] br,int[][] land,boolean[][] isVisited,int i,int j,int m,int n){
-
-        if(i<0 || j<0 || i>=m || j>=n || isVisited[i][j] || land[i][j]==0) return;
-        if(i>=br[0] && j>=br[1]){
-            br[0]=i;br[1]=j;
+        grid[i][j]=-1;
+        int x = i+1;
+        while(x<m){
+            if(grid[x][j]==0)break;
+            else grid[x][j] =-1;
+            x++;
         }
-        isVisited[i][j]=true;
-        DFS(br,land,isVisited,i+1,j,m,n);
-        DFS(br,land,isVisited,i-1,j,m,n);
-        DFS(br,land,isVisited,i,j+1,m,n);
-        DFS(br,land,isVisited,i,j-1,m,n);
+        int y = j+1;
+        while(y<n){
+            if(grid[i][y]==0)break;
+            y++;
+        }
+        l.add(x-1);l.add(y-1);
+        if(y==n) return;
+        grid[i][y]=-1;
+        //System.out.print(i+" ** "+y);
+        
+        x-=1;
+        while(x>=i){
+            grid[x][y]=-1;
+            x--;
+        }
     }
 }
