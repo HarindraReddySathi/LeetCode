@@ -1,14 +1,16 @@
 class Solution {
-    public int subsetXORSum(int[] nums) {
-        
-        int sum = 0;
-        for (int i= 1 ;i<1<<nums.length;++i){
-            int temp = 0 ; 
-            for(int k=0;k<nums.length;++k){
-                if((i&(1<<k))!=0)temp^=nums[k]; 
-            }
-            sum+=temp;
+    int s;
+    void ans(int nums[], int i, int sum){
+        if(i==nums.length-1){
+            s+=(sum^nums[i])+sum;
+            return;
         }
-        return sum;
+        ans(nums, i+1, sum);
+        ans(nums, i+1, sum^nums[i]);
+    }
+    public int subsetXORSum(int[] nums) {
+        s=0;
+        ans(nums, 0, 0);
+        return s;
     }
 }
