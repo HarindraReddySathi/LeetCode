@@ -30,16 +30,12 @@ class Solution {
     public void marking(int[][] grid,int i,int j,List<Integer> l,int m,int n){
 
         grid[i][j]=-1;
-        int x = i;
-        while(x<m){
+        int x = i,y=j;
+        while(++x<m){
             if(grid[x][j]==0)break;
             else grid[x][j] =-1;
-            x++;
         }
-        int y = j;
-        while(++y<n){
-            if(grid[i][y]==0)break;
-        }
+        while(++y<n) if(grid[i][y]==0)break;
         l.add(x-1);l.add(y-1);
         if(y==n) return;
         while(--x>=i) grid[x][y]=-1;
