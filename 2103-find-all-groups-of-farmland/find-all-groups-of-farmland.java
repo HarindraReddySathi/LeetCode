@@ -37,9 +37,8 @@ class Solution {
             x++;
         }
         int y = j;
-        while(y<n){
+        while(++y<n){
             if(grid[i][y]==0)break;
-            y++;
         }
         l.add(x-1);l.add(y-1);
         if(y==n) return;
