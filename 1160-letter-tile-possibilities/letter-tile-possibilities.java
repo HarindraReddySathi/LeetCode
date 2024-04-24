@@ -11,7 +11,6 @@ class Solution {
         for(int i=3;i<=n;i++){
             int prev = ans[0];
             backTrack(a,chars,0,i,i,ans);
-            //if(i==3)System.out.print(ans[0]-prev);
         }
         return ans[0];
     }
@@ -20,12 +19,9 @@ class Solution {
 
         if(maxSize==0){
             int temp = facts[size];
-            //if(size==3)System.out.print(" (");
             for(int i=0;i<a.length;i++){
                 temp /= facts[a[i]];
-                //if(size==3)System.out.print(a[i]+" , ");
             }
-            //if(size==3)System.out.print(" )");
             ans[0]+=temp;
             return;
         }
@@ -39,12 +35,10 @@ class Solution {
 
     public void getAnswerBelow3(int[] ans,int[] chars,int n){
         ans[0]= chars.length;
-        //System.out.println(ans[0]);
         if(n==1) return;
         int distinct = chars.length;
         ans[0] += (distinct*(distinct-1)/2)*facts[2];
         for(int i : chars)if(i>=2) ans[0]++;
-        //System.out.println(ans[0]-distinct);
     }
 
     public int[] getDistictCharsCount(String tiles){
