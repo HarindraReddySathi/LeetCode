@@ -6,7 +6,7 @@ class Solution {
         int max = 0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                if(grid[i][j]==1 && !check[i][j]){
+                if(grid[i][j]==1){
                     int temp = DFS(grid,check,i,j,m,n);
                     if(temp>max)max = temp;
                 }
@@ -16,8 +16,9 @@ class Solution {
     }
 
     public int DFS(int[][] grid,boolean[][] check,int i,int j, int m, int n){
-        if(i<0 || j<0 || i>=m || j>=n || check[i][j] || grid[i][j]==0) return 0;
-        check[i][j]=true;
+        if(i<0 || j<0 || i>=m || j>=n || grid[i][j]==-1 || grid[i][j]==0) return 0;
+        grid[i][j]=-1;
+        //check[i][j]=true;
         int count=1;
         count+=DFS(grid,check,i+1,j,m,n);
         count+=DFS(grid,check,i-1,j,m,n);
