@@ -12,11 +12,10 @@ class Solution {
                 sum[pos]+=ch[i]-'0';
             }
         }
-        if((sum[0]>sum[1] && q[0]>q[1])||(sum[1]>sum[0] && q[1]>q[0])) return true;
-        int diff = (sum[0]>sum[1]) ? sum[0]-sum[1] : sum[1]-sum[0];
-        int vaca = (q[0]>q[1]) ? q[0]-q[1] : q[1]-q[0];
-        if(vaca%2!=0 || diff%9!=0) return true;
-        if(vaca/2==diff/9) return false;
+        int diff = sum[0]-sum[1];
+        int vaca = q[0]-q[1];
+        if(diff*vaca>0 || vaca%2!=0 || diff%9!=0) return true;
+        if(vaca/2==(-1*diff/9)) return false;
         return true;
     }
 }
