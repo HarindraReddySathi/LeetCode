@@ -30,7 +30,7 @@ class Solution {
     public void marking(int[][] grid,int i,int j,List<Integer> l,int m,int n){
 
         grid[i][j]=-1;
-        int x = i+1;
+        int x = i;
         while(x<m){
             if(grid[x][j]==0)break;
             else grid[x][j] =-1;
