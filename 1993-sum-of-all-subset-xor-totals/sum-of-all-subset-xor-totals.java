@@ -5,7 +5,7 @@ class Solution {
         int stage =0;
         int cur=1;
         int ans =0;
-        while(stage<32){
+        while(stage<5){
             int[] digit = new int[2]; 
             for(int i=0;i<n;i++){
                 digit[nums[i]&1]++;
