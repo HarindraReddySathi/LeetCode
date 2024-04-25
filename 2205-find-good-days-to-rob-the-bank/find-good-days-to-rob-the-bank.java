@@ -7,23 +7,22 @@ class Solution {
             return ans;
         }
         int[] memo = new int[n];
-        int cur =0;
-        for(int i=n-2;i>=0;i--){
-            if(nums[i]<=nums[i+1]){
-                cur++;
-                if(cur>=time)memo[i]++;
+        int l =0,r=0;
+        int i=0,j=n-1;
+        while(++i<n && --j>=0){
+            if(nums[j]<=nums[j+1]){
+                r++;
+                if(r>=time)memo[j]++;
+                if(memo[j]==2)ans.add(j);
             }else{
-                cur=0;
+                r=0;
             }
-        }
-        cur=0;
-        for(int i=1;i<n;i++){
             if(nums[i]<=nums[i-1]){
-                cur++;
-                if(cur>=time)memo[i]++;
+                l++;
+                if(l>=time)memo[i]++;
                 if(memo[i]==2)ans.add(i);
             }else{
-                cur=0;
+                l=0;
             }
         }
         return ans;
