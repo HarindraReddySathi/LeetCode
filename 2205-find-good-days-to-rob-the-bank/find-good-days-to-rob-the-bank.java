@@ -11,20 +11,20 @@ class Solution {
         for(int i=n-2;i>=0;i--){
             if(nums[i]<=nums[i+1]){
                 cur++;
+                if(cur>=time)memo[i]++;
             }else{
                 cur=0;
             }
-            if(cur>=time)memo[i]++;
         }
         cur=0;
         for(int i=1;i<n;i++){
             if(nums[i]<=nums[i-1]){
                 cur++;
+                if(cur>=time)memo[i]++;
+                if(memo[i]==2)ans.add(i);
             }else{
                 cur=0;
             }
-            if(cur>=time)memo[i]++;
-            if(memo[i]==2)ans.add(i);
         }
         return ans;
     }
