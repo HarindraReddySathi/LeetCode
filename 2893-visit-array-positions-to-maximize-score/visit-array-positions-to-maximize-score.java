@@ -7,13 +7,6 @@ class Solution {
         memo[nums[0]%2] = nums[0];
         int pop = (nums[0]%2==0)? 1:0;
         memo[pop] = nums[0]-x;
-        //System.out.println(memo[0]+" -- "+memo[1]);
-        /*if(nums[1]%2==nums[0]%2){
-            memo[nums[0]%2] += nums[1];
-        }else{
-            memo[nums[1]%2]  = nums[0]+nums[1]-x;
-        }*/
-        //System.out.println(memo[0]+" -- "+memo[1]);
         for(int i =1;i<n;i++){
             int dec = nums[i]%2;
             int diff = (dec==0) ? 1:0;
@@ -21,8 +14,6 @@ class Solution {
             long change = 0l+nums[i]+memo[diff]-x;
             long ans = (long)Math.max(same,change);
             if(memo[dec]<same)memo[dec]=ans;
-            //if(memo[diff]<change) memo[diff]=change;
-            //System.out.println(memo[0]+" -- "+memo[1]);
         }
         return (long)Math.max(memo[0],memo[1]);
     }
