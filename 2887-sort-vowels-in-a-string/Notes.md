@@ -1,1 +1,1 @@
-<h2>sort-vowels-in-a-string Notes</h2><hr>[ Time taken: 20 m 50 s ]
+<h2>sort-vowels-in-a-string Notes</h2><hr>[ Time taken: 22 m 53 s ]
