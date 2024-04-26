@@ -3,7 +3,6 @@ class Solution {
         
         int n = p.length;
         int[] prefix = new int[n];
-        int[] suffix = new int[n];
         int i=0,j=0,max =-1;
         int ans =0;
         while(j<n){
@@ -22,10 +21,10 @@ class Solution {
 
             while(j>=0 && p[i]-p[j]<=k){
                 if(max<i-j+1)max = i-j+1;
-                suffix[j]=max;
+                prefix[j]=max;
                 if(ans<i-j+1) ans = max;
                 if(j!=0 && p[j-1]!=p[j]){
-                    int cur = prefix[j-1]+suffix[j];
+                    int cur = prefix[j-1]+prefix[j];
                     if(cur>ans) ans =cur;
                 }
                 j--;
