@@ -24,18 +24,22 @@ class Solution {
                 if(max<i-j+1)max = i-j+1;
                 suffix[j]=max;
                 if(ans<i-j+1) ans = max;
+                if(j!=0 && p[j-1]!=p[j]){
+                    int cur = prefix[j-1]+suffix[j];
+                    if(cur>ans) ans =cur;
+                }
                 j--;
             }
             i--;
         }
-        i=0;
+        /*i=0;
         while(i<n-1){
             if(p[i]!=p[i+1]){
                 int cur = prefix[i]+suffix[i+1];
                 if(cur>ans) ans =cur;
             }
             i++;
-        }
+        }*/
 
         return ans;
 
