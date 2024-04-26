@@ -2,6 +2,8 @@ class Solution {
     public int maximizeWin(int[] p, int k) {
         
         int n = p.length;
+        if(p[n - 1] - p[0] <= 2 * k)
+            return n;
         int[] prefix = new int[n];
         int i=0,j=0,max =-1;
         int ans =0;
@@ -31,15 +33,6 @@ class Solution {
             }
             i--;
         }
-        /*i=0;
-        while(i<n-1){
-            if(p[i]!=p[i+1]){
-                int cur = prefix[i]+suffix[i+1];
-                if(cur>ans) ans =cur;
-            }
-            i++;
-        }*/
-
         return ans;
 
     }
