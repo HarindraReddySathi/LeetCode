@@ -2,7 +2,6 @@ class Solution {
     public int maximizeWin(int[] p, int k) {
         
         int n = p.length;
-        //if(k==220) return 74;
         Map<Integer,Integer> prefix = new HashMap<>();
         Map<Integer,Integer> suffix = new HashMap<>();
         int i=0,j=0,max =-1;
