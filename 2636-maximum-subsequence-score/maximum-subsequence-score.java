@@ -8,9 +8,8 @@ class Solution {
         int n=nums1.length;
         int[][] hi = new int[n][2];
 
-        for(int i=0;i<n;i++) {
-            hi[i][0] = nums1[i];
-            hi[i][1] = nums2[i];
+        for (int i = 0; i < n; i++) {
+            hi[i] = new int[]{nums1[i], nums2[i]};
         }
 
         Arrays.sort(hi, comp);
