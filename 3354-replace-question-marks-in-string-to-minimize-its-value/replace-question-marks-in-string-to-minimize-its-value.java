@@ -25,7 +25,7 @@ class Solution {
             if(alpha[c-'a']==0) distinct++;
             alpha[c-'a']++;
         }
-        char[] quesPos = new char[ques];
+        int[]  sol = new int[26];
         PriorityQueue<int[]> minHeap = new PriorityQueue<>(comp);
         for(int i=0;i<26;i++){
             if(alpha[i]!=0){
@@ -40,7 +40,8 @@ class Solution {
                     adding[1]=1;
                     minHeap.add(adding);
                     ques--;
-                    quesPos[ques] = (char)(i+'a');
+                    sol[i]++;
+                    //quesPos[ques] = (char)(i+'a');
                 }
             }
         }
@@ -48,16 +49,22 @@ class Solution {
         while(ques>0){
             int[] cur = minHeap.poll();
             ques--;
-            quesPos[ques] = (char)(cur[0]+'a');
+            sol[cur[0]]++;
+            //quesPos[ques] = (char)(cur[0]+'a');
             cur[1]++;
             minHeap.add(cur);
         }
 
-        Arrays.sort(quesPos);
-        for(int i =0,j=0;i<n;i++){
+        //Arrays.sort(quesPos);
+        for(int i =0;i<n;i++){
             if(ch[i]=='?'){
-                ch[i]=quesPos[j];
-                j++; 
+                for(int j=0;j<26;j++){
+                    if(sol[j]>0){
+                        sol[j]--;
+                        ch[i]= (char)(j+'a');
+                        break;
+                    }
+                }
             }
         }
         return String.valueOf(ch);
