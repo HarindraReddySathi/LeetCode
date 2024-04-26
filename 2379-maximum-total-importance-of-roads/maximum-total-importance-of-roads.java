@@ -5,7 +5,12 @@ class Solution {
         for(int[] i : roads){
             nodes[i[0]]++;nodes[i[1]]++;
         }
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        Arrays.sort(nodes);
+        long ans =0;
+        for(int i=n-1,cur=n;i>=0;i--,cur--){
+            ans = ans+ (1l*cur*nodes[i]);
+        }
+        /*PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
         for(int i : nodes){
             maxHeap.add(i);
         }
@@ -13,7 +18,7 @@ class Solution {
         int cur = n;
         while(!maxHeap.isEmpty()){
             ans = ans + (1l*maxHeap.poll()*cur--);
-        }
+        }*/
         return ans;
     }
 }
