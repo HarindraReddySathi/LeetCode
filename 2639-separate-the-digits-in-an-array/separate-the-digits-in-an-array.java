@@ -9,18 +9,12 @@ class Solution {
             else if(i<100000)size+=5;
             else size+=6;
         }
-        //System.out.println(size);
-        int[] ans = new int[size];
-        int cur =0;
-        for(int i : nums){
-            List<Integer> l = new ArrayList<>();
-            while(i>0){
-                l.add(i%10);
-                i=i/10;
-            }
-            Collections.reverse(l);
-            for(int j : l){
-                ans[cur++]=j;
+        int[] ans = new int[size--];
+        for(int i=nums.length-1;i>=0;i--){
+            int num = nums[i];
+            while(num>0){
+                ans[size--] = num%10;
+                num /= 10;
             }
         }
         return ans;
