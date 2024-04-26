@@ -1,44 +1,54 @@
 class Solution {
-    Comparator<int[]> comp = new Comparator<>(){
-        public int compare(int[] n1, int[] n2) {
-            return n1[1]-n2[1];
-        }
-    };
+
+    //// Need to Analyse
+
     public long maxScore(int[] nums1, int[] nums2, int k) {
-        int n=nums1.length;
-        int[][] hi = new int[n][2];
-
-        for (int i = 0; i < n; i++) {
-            hi[i] = new int[]{nums1[i], nums2[i]};
+   int max2 = 0;
+        for (int x : nums2) {
+            if (x > max2) {
+                max2 = x;
+            }
         }
-
-        Arrays.sort(hi, comp);
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-        long sum = 0;
-        long ans = 0;
-
-        for(int i=n-1;i>=0;i--) {
-            if(i>n-k) {
-                minHeap.add(hi[i][0]);
-                sum+=hi[i][0];
-                continue;
+        List<Integer>[] map = new List[max2 + 1];
+        int n = nums1.length;
+        for (int i = 0; i < n; ++i) {
+            if (map[nums2[i]] == null) {
+                map[nums2[i]] = new ArrayList<>();
             }
-            if(i==n-k) {
-                minHeap.add(hi[i][0]);
-                sum+=hi[i][0];
-                ans=1l*sum*hi[i][1];
-                continue;
-            }
-            if(hi[i][0] < minHeap.peek()) {
-                continue;
-            }
-            sum-=minHeap.poll();
-            sum+=hi[i][0];
-            minHeap.add(hi[i][0]);
-            if(ans< 1l*sum*hi[i][1]) ans = 1l*sum*hi[i][1];
+            map[nums2[i]].add(nums1[i]);
         }
-        return ans;
+        int max1 = 0;
+        for (int x : nums1) {
+            if (x > max1) {
+                max1 = x;
+            }
+        }
+        int[] count = new int[max1 + 1];
+        int min1 = -1;
+        long sum = 0, result = 0;
+        for (int num2 = max2; num2 >= 0; --num2) {
+            if (map[num2] == null) {
+                continue;
+            }
+            for (int num1 : map[num2]) {
+                if (num1 < min1) {
+                    continue;
+                }
+                ++count[num1];
+                sum += num1;
+                if (--k <= 0) {
+                    result = Math.max(result, sum * num2);
+                    if (min1 == -1) {
+                        ++min1;
+                    }
+                    while (count[min1] == 0) {
+                        ++min1;
+                    }
+                    sum -= min1;
+                    --count[min1];
+                }
+            }
+        }
+        return result;
     }
-
-
 }
