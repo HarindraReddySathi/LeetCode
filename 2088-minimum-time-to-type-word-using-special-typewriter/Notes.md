@@ -1,0 +1,1 @@
+<h2>minimum-time-to-type-word-using-special-typewriter Notes</h2><hr>[ Time taken: 8 m 44 s ]
