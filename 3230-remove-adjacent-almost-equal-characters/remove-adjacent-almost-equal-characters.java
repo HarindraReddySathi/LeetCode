@@ -9,7 +9,6 @@ class Solution {
                 temp++;
                 i++;
                 j++;
-                System.out.println(i+"--"+j);
             }
             ans+=temp/2;
             if(j==n) break;
