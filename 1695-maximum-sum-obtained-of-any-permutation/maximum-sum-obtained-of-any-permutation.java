@@ -17,8 +17,8 @@ class Solution {
         long ans =0;
         for(int i=n-1;i>=0;i--){
             int p1 = arr[i];
-            ans = (ans+((1l*p1*nums[i])%mod))%mod;
+            ans += (1l*p1*nums[i]);
         }
-        return (int)ans;
+        return (int)(ans%mod);
     }
 }
