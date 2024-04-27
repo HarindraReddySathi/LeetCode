@@ -1,57 +1,47 @@
 class Solution {
     public int maxDiff(int num) {
         
-        char[] high = Integer.toString(num).toCharArray();
-        char[] low = Integer.toString(num).toCharArray();
-        int n = high.length;
-
+        char[] ch = Integer.toString(num).toCharArray();
+        int n = ch.length;
         //high
-        char x ='$';
-        char y = '9';
-        if(high[0]!='9') x=high[0];
-        else{
-            for(int i=0;i<n;i++){
-                if(high[i]!='9'){
-                    x=high[i];
-                    break;
-                }
+        char high = 'p';
+        for(char c : ch){
+            if(c!='9'){
+                high=c;
+                break;
             }
         }
-        if(x!='$'){
-            for(int i=0;i<n;i++){
-                if(high[i]==x) high[i]=y;
-            }
-        }
-
         //Low
-        x ='$';
-        y = '0';
-        if(low[0]!='1'){
-            x=low[0];
-            y='1';
+        char low = 'p';
+        int val = 1;
+        if(ch[0]!='1'){
+            //System.out.println("****");
+            low = ch[0];
         }
-        else{
-            for(int i=0;i<n;i++){
-                if(low[0]=='1' && low[i]!='0' && low[i]!='1'){
-                    x=low[i];
-                    break;
-                }
-                if(low[0]!='1' && low[i]!='0'){
-                    x=low[i];
+        //System.out.println(high + " --- "+low);
+        if(low=='p'){
+            val=0;
+            for(char c : ch){
+                if(c!='0' && c!='1'){
+                    low=c;
                     break;
                 }
             }
         }
-        if(x!='$'){
-            for(int i=0;i<n;i++){
-                if(low[i]==x) low[i]=y;
-            }
-        }
-
+        //System.out.println(high + " --- "+low);
         /// Calculation
-        int h = Integer.parseInt(String.valueOf(high));
-        int l = Integer.parseInt(String.valueOf(low));
-        System.out.println(h+"--"+l);
-        return (h-l);
+        int ans =0;
+        int cur =1;
+        for(int i=n-1;i>=0;i--){
+            int fac =0;
+            if(ch[i]==high) fac =9;
+            else fac = ch[i]-'0';
+            if(ch[i]==low) fac -=val;
+            else fac -= ch[i]-'0';
+            ans+=(cur*fac);
+            cur*=10;
+        }
+        return ans;
+        
     }
 }
