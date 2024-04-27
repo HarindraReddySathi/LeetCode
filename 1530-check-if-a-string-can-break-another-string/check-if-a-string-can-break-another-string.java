@@ -17,7 +17,7 @@ class Solution {
             sum1 += a1[i];
             sum2 += a2[i];
             if(sum1==sum2) continue;
-            if((sum1-sum2)*dec<0) return false;
+            if((sum1>sum2 && dec<0) ||(sum1<sum2 && dec>0)) return false;
             if(sum1>sum2) dec =1;
             else dec =-1;
         }
