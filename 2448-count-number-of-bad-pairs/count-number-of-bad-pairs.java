@@ -6,10 +6,12 @@ class Solution {
         Map<Integer,Integer> map = new HashMap<>();
         for(int i =0;i<n;i++){
             int cur = nums[i]-i;
+            int val =0;
             if(map.containsKey(cur)){
-                ans-=map.get(cur);
+                val = map.get(cur);
+                ans-= val;
             }
-            map.put(cur,map.getOrDefault(cur,0)+1);
+            map.put(cur,val+1);
         }
         return ans;
     }
