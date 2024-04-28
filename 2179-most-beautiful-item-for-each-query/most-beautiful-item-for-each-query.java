@@ -3,8 +3,6 @@ class Solution {
         
         int n = items.length;
         Arrays.sort(items,(a,b) -> a[0]-b[0]);
-        int[] beauty = new int[n];
-        beauty[0]=items[0][1];
         for(int i =1;i<n;i++){
             if(items[i][1]<items[i-1][1]) items[i][1] = items[i-1][1];
         }
