@@ -18,7 +18,7 @@ class Solution {
         int[] setCount = new int[32];
         for(int i=0;i<n;i++) {
             if(count==0){
-                System.out.println("*****");
+                //System.out.println("*****");
                 ans[i]=1;
                 continue;
             }
