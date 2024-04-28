@@ -7,6 +7,8 @@ class Solution {
         int cur = 0;
         Map<Integer,Set<Integer>> map = new HashMap<>();
         int res = 0;
+        int xpre =0;
+        int ypre =0;
         for(int i=0;i<m;i++){
             map.computeIfAbsent(obstacles[i][0],l -> new HashSet<>()).add(obstacles[i][1]);
         }
@@ -33,7 +35,10 @@ class Solution {
                     }
 
                 }
-                int temp = pos[0]*pos[0]+pos[1]*pos[1];
+                if(x!=0) xpre = pos[0]*pos[0];
+                if(y!=0) ypre = pos[1]*pos[1];
+
+                int temp = xpre+ypre;
                 if(res<temp)res = temp;
             }
 
