@@ -1,36 +1,51 @@
 
 public class Solution {
+
+    // Helper method to check if nums2 can be obtained by potentially skipping up to two elements from nums1
+    private boolean isPossible(int[] nums1, int[] nums2) {
+        int i = 0, j = 0, stepsLeft = 2;
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] == nums2[j]) {
+                i++;
+                j++;
+            } else {
+                i++;
+                stepsLeft--;
+                if (stepsLeft < 0) {
+                    return false;
+                }
+            }
+        }
+        return j == nums2.length && (i - j) <= 2;
+    }
+
+    // Main method to find the minimum integer that can be added to nums1 to make it match nums2 as closely as possible
     public int minimumAddedInteger(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
         Arrays.sort(nums2);
 
-        int n = nums1.length;
-        int m = nums2.length;
-        int min_x = Integer.MAX_VALUE;  // Initialize min_x to the maximum possible value
+        Map<Integer, Integer> mapp = new HashMap<>();
+        int mini = Integer.MAX_VALUE;
 
-        int[][] memo = new int[n][3];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<3;j++){
-                if(i-j>=0 && i-j<m) memo[i][j] = nums2[i-j]-nums1[i];
+        for (int i = 0; i < nums1.length; i++) {
+            for (int j = 0; j < nums2.length; j++) {
+                int diff = nums2[j] - nums1[i];
+                mapp.put(diff, mapp.getOrDefault(diff, 0) + 1);
             }
         }
-        int ans = Integer.MAX_VALUE;
-        for(int col = 0;col<3;col++) {
-            int prev = memo[col][col];
-            int j=col;
-            int count = 1;
-            for(int i=col+1;i<n && j<3 && count<m;i++) {
 
-                if(memo[i][j]==prev) {
-                    count++;
-                    continue;
-                }
-                j++;
-                
+        for (int k : mapp.keySet()) {
+            int[] curr = new int[nums1.length];
+            for (int i = 0; i < nums1.length; i++) {
+                curr[i] = nums1[i] + k;
             }
-            if(j<3) ans=Math.min(ans,prev);
+            Arrays.sort(curr);
+
+            if (this.isPossible(curr, nums2)) {
+                mini = Math.min(mini, k);
+            }
         }
-        return ans;
+
+        return mini;
     }
-
 }
