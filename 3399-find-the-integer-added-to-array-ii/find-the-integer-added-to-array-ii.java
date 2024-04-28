@@ -8,36 +8,29 @@ public class Solution {
         int m = nums2.length;
         int min_x = Integer.MAX_VALUE;  // Initialize min_x to the maximum possible value
 
-        // Generate all combinations of indices to be removed from nums1
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                // Creating new array of size n-2
-                int[] new_nums1 = new int[n - 2];
-                int idx = 0;
-                for (int k = 0; k < n; k++) {
-                    if (k != i && k != j) {
-                        new_nums1[idx++] = nums1[k];
-                    }
-                }
-
-                // Calculate x based on the first elements (smallest since both are sorted)
-                int x = nums2[0] - new_nums1[0];
-
-                // Check if this x works for all remaining elements in new_nums1
-                boolean valid = true;
-                for (int k = 0; k < m; k++) {
-                    if (nums2[k] != new_nums1[k] + x) {
-                        valid = false;
-                        break;
-                    }
-                }
-
-                if (valid) {
-                    min_x = Math.min(min_x, x);
-                }
+        int[][] memo = new int[n][3];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<3;j++){
+                if(i-j>=0 && i-j<m) memo[i][j] = nums2[i-j]-nums1[i];
             }
         }
+        int ans = Integer.MAX_VALUE;
+        for(int col = 0;col<3;col++) {
+            int prev = memo[col][col];
+            int j=col;
+            int count = 1;
+            for(int i=col+1;i<n && j<3 && count<m;i++) {
 
-        return min_x;
+                if(memo[i][j]==prev) {
+                    count++;
+                    continue;
+                }
+                j++;
+                
+            }
+            if(j<3) ans=Math.min(ans,prev);
+        }
+        return ans;
     }
+
 }
