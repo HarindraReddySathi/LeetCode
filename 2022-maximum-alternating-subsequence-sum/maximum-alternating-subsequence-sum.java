@@ -6,18 +6,14 @@ class Solution {
         long ans =0;
         int prev =0;
         for(int i=0;i<n;i++){
-            if(prev ==0){
+            if(prev ==0 || nums[i]>prev){
                 prev = nums[i];
-            }else{
-                if(nums[i]>prev){
-                    prev = nums[i];
-                    continue;
-                }
-                if(i!=n-1){
-                    if(nums[i]<nums[i+1]){
-                        ans+=(prev-nums[i]);
-                        prev=0;
-                    }
+                continue;
+            }
+            if(i!=n-1){
+                if(nums[i]<nums[i+1]){
+                    ans+=(prev-nums[i]);
+                    prev=0;
                 }
             }
         }
