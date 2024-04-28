@@ -18,7 +18,7 @@ class Solution {
             int high = n-1;
             int ans =0;
             while(low<=high){
-                int mid = low+(high-low)/2;
+                int mid = low+((high-low)>>1);
                 if(items[mid][0]<=queries[i]){
                     ans = beauty[mid];
                     low = mid+1;
