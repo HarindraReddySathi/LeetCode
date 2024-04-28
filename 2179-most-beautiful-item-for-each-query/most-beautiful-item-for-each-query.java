@@ -6,7 +6,6 @@ class Solution {
         for(int i =1;i<n;i++){
             if(items[i][1]<items[i-1][1]) items[i][1] = items[i-1][1];
         }
-        int[] res = new int[queries.length];
         for(int i=0;i<queries.length;i++){
             int low =0;
             int high = n-1;
@@ -20,8 +19,8 @@ class Solution {
                     high = mid -1;
                 }
             }
-            res[i]=ans;
+            queries[i]=ans;
         }
-        return res;
+        return queries;
     }
 }
