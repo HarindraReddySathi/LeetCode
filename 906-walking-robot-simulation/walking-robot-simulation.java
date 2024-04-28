@@ -33,7 +33,8 @@ class Solution {
                     }
 
                 }
-                res = Math.max(res, (pos[0]*pos[0]+pos[1]*pos[1]));
+                int temp = pos[0]*pos[0]+pos[1]*pos[1];
+                if(res<temp)res = temp;
             }
 
             //System.out.println(pos[0]+" -- " + pos[1]);
