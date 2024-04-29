@@ -18,6 +18,7 @@ class Solution {
             return;
         }
         if(cur>9) return;
+        if(sum>=n) return; 
         comb[level]=cur;
         DFS(ans,comb,n,level+1,cur+1,k,sum+cur);
         comb[level]=0;
