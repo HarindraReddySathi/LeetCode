@@ -5,9 +5,9 @@ class Solution {
         int[] bCount = new int[51];
         int common =0;
         for(int i=0;i<n;i++){
-            aCount[A[i]]++;bCount[B[i]]++;
             if(A[i]==B[i]) common++;
             else{
+                aCount[A[i]]++;bCount[B[i]]++;
                 if(aCount[A[i]]==bCount[A[i]]) common++;
                 if(aCount[B[i]]==bCount[B[i]]) common++;
             }
