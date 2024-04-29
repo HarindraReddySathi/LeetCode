@@ -1,20 +1,20 @@
 class Solution {
     public String getSmallestString(int n, int k) {
-        StringBuilder sb = new StringBuilder();
+        char[] c = new char[n];
         int possible = 26*(n-1);
         k--;
         for(int i=0;i<n;i++) {
             if(possible > k) {
-                sb.append("a");
+                c[i]='a';
                 k--;
             }
             else {
-                char ch = (char)(k-possible+'a');
-                sb.append(ch+"");
+                c[i] = (char)(k-possible+'a');
+                
                 k-=(k-possible+1);
             }
             possible-=26;
         }
-        return sb.toString();
+        return String.valueOf(c);
     }
 }
