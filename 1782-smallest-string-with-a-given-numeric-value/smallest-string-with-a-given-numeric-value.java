@@ -15,6 +15,6 @@ class Solution {
             }
             possible-=26;
         }
-        return String.valueOf(c);
+        return new String(c);
     }
 }
