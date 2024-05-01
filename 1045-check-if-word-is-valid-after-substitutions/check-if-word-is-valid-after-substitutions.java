@@ -1,17 +1,17 @@
 class Solution {
     public boolean isValid(String s) {
-        
-        int n = s.length();
-        char[] ch = s.toCharArray();
-        Stack<Character> stack = new Stack<>();
-        for(int i=0;i<n;i++){
-            if(ch[i]!='c'){
-                stack.push(ch[i]);
-                continue;
-            }else{
-                if(stack.isEmpty() || stack.pop()!='b' || stack.isEmpty() || stack.pop()!='a') return false;
-            }
-        }
-        return stack.isEmpty();
+        // while (s.contains("abc"))
+        //     s = s.replaceAll("abc", "");
+        // return s.isEmpty();
+
+        char[] stack = new char[s.length()];
+        int stackPtr = -1;
+        for (char c : s.toCharArray()) {
+            if (c == 'c') {
+                if (stackPtr > 0 && stack[stackPtr] == 'b' && stack[stackPtr-1] == 'a')
+                    stackPtr = stackPtr - 2;
+                else return false;
+            } else stack[++stackPtr] = c;
+        } return stackPtr == -1;
     }
 }
