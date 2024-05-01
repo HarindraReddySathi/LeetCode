@@ -1,29 +1,48 @@
 class Solution {
-    public long minCost(int[] num, int[] cost) {
-        
-        int n = num.length;
-        int[][] nums = new int[n][2];
-        for(int i=0;i<n;i++){
-            nums[i][0] = num[i];
-            nums[i][1] = cost[i];
+    public long minCost(int[] nums, int[] cost) {
+        int left = Integer.MAX_VALUE;
+        int right = Integer.MIN_VALUE;
+
+        for(int i=0; i<nums.length; i++){
+            left = Math.min(left, nums[i]);
+            right = Math.max(right, nums[i]);
         }
-        Arrays.sort(nums,(a,b) -> a[0]-b[0]);
-        long[] suffix = new long[n];
-        long[] prefix = new long[n];
-        long prev = nums[n-1][1];
-        for(int i = n-2;i>=0;i--){
-            suffix[i] = suffix[i+1] + (prev)*(nums[i+1][0]-nums[i][0]);
-            prev += nums[i][1];
+
+        //long ans = getCost(nums, cost, nums[0]);
+        long ans =0;
+
+
+        while(left<right){
+            int mid = (left+right)/2;
+
+            // finding the cost of the left one 
+            long leftCost = getCost(nums, cost,mid);
+            // finding the cost of the right one 
+            long rightCost = getCost(nums, cost, mid+1);
+
+            ans = Math.min(leftCost, rightCost);
+
+            if(leftCost>rightCost){
+                left = mid+1;
+            }else{
+                right = mid;
+            }
+
         }
-        prev = nums[0][1];
-        for(int i =1;i<n;i++){
-            prefix[i] = prefix[i-1] + (prev)*(nums[i][0]-nums[i-1][0]);
-            prev += nums[i][1];
-        }
-        long ans = Long.MAX_VALUE;
-        for(int i =0 ;i<n;i++){
-            if(prefix[i]+suffix[i]<ans) ans = prefix[i]+suffix[i];
-        }
+
         return ans;
+
+    }
+
+// function to get the cost for the nums[i] any element base case 
+    public static long getCost(int[] nums, int[] cost, int base){
+        long res = 0l;
+
+        for(int i=0; i<nums.length; i++){
+            // by abs difference we can get the cost
+            res+= 1l*cost[i]*Math.abs(base-nums[i]);
+        }
+
+        return res;
     }
 }
