@@ -13,6 +13,6 @@ class Solution {
             }
         }
         if((max[0]==max[1])|| (sum-max[0]>=max[0])) return sum;
-        return 2l*(sum-max[0])+1;
+        return ((sum-max[0])<<1)+1;
     }
 }
