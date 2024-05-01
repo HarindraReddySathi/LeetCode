@@ -11,10 +11,6 @@ class Solution {
     public  boolean isTargetFound = false;
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
         List<Integer> ans = new ArrayList<>();
-        if(k==0){
-            ans.add(target.val);
-            return ans;
-        }
         BFS(target,ans,k);
         DFS(root,target.val,k,ans);
         return ans;
