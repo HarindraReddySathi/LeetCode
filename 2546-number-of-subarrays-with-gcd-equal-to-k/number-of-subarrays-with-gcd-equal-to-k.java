@@ -5,11 +5,13 @@ class Solution {
         int ans =0;
         for(int i=0;i<n;i++){
             int prev = nums[i];
+            if(prev<k) continue;
             if(prev ==k){
                 ans++;
             }
             for(int j=i+1;j<n;j++){
                 prev = gcd(prev,nums[j]);
+                if(prev<k) break;
                 if(prev ==k){
                     ans++;
                 }
