@@ -9,6 +9,10 @@ class Solution {
         int high = n-1;
         int prev = n-1;
         for(int i=0;i<m;i++){
+            if(grid[i][high]>=0){
+                ans+=high+1;
+                continue;
+            }
             int mid = low+((high-low)>>1);
             while(low<=high){
                 mid = low+((high-low)>>1);
