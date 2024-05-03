@@ -25,7 +25,7 @@ class Solution {
             high =(temp==-1) ? prev : temp-1;
             prev = high;
             low =0;
-            System.out.println(low +" -- "+" -- "+high+" -- "+temp);
+            //System.out.println(low +" -- "+" -- "+high+" -- "+temp);
         }
         return m*n-ans;
     }
