@@ -11,21 +11,10 @@ class Solution {
             long prev =0;
             for(int j = n-1;j>=0;j--){
                 if(n-j<=i) continue;
-                //System.out.println(i+" -- "+j+" -- "+prev+" -- "+memo[i-1][j+1]+" -- "+memo[i][j+1]);
                 memo[i][j] = (prev+memo[i-1][j+1]+memo[i][j+1])%mod;
                 prev = (prev+memo[i-1][j+1])%mod;
             }
         }
-        //print(memo,n,k);
         return (int)(memo[k][0]%mod);
-    }
-
-    public void print(int[][] memo,int n,int k){
-        for(int i =0;i<=k;i++){
-            for(int j =0;j<n;j++){
-                System.out.print(memo[i][j]+" -- ");
-            }
-            System.out.println();
-        }
     }
 }
