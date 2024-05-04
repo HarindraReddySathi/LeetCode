@@ -2,7 +2,7 @@ class Solution {
     public int[] smallestSubarrays(int[] nums) {
         int n = nums.length;
         int[] res = new int[n];
-        Arrays.fill(res, 1);
+        //Arrays.fill(res, 1);
         
         for (int bit = 0; bit < 30; bit++) {
             Integer lastOne = null;
@@ -13,6 +13,8 @@ class Solution {
                 } else {
                     if (lastOne != null) {
                         res[idx] = Math.max(res[idx], lastOne - idx + 1);
+                    }else{
+                        res[idx] = Math.max(res[idx],1);
                     }
                 }
             }
