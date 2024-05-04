@@ -9,8 +9,8 @@ class Solution {
         }
         for(int i =2;i<k+1;i++){
             long prev =0;
-            for(int j = n-1;j>=0;j--){
-                if(n-j<=i) continue;
+            for(int j = n-i-1;j>=0;j--){
+                //if(n-j<=i) continue;
                 memo[i][j] = (prev+memo[i-1][j+1]+memo[i][j+1])%mod;
                 prev = (prev+memo[i-1][j+1])%mod;
             }
