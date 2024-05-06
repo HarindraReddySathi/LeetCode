@@ -11,6 +11,7 @@
 class Solution {
     public ListNode removeNodes(ListNode head) {
         ListNode temp = head;
+        ListNode root = null;
         Stack<ListNode> stack = new Stack<>();
         while(temp!=null){
 
@@ -18,13 +19,11 @@ class Solution {
                 stack.pop();
             }
             if(!stack.isEmpty())stack.peek().next=temp;
+            if(stack.isEmpty()) root = temp;
             stack.push(temp);
             temp = temp.next;
         }
-        ListNode prev =null;
-        while(!stack.isEmpty()){
-            prev = stack.pop();
-        }
-        return prev;
+        return root;
+        
     }
 }
