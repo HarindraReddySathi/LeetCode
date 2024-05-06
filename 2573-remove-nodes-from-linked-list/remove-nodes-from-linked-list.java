@@ -10,20 +10,9 @@
  */
 class Solution {
     public ListNode removeNodes(ListNode head) {
-        ListNode temp = head;
-        ListNode root = null;
-        Stack<ListNode> stack = new Stack<>();
-        while(temp!=null){
-
-            while(!stack.isEmpty() && stack.peek().val<temp.val){
-                stack.pop();
-            }
-            if(!stack.isEmpty())stack.peek().next=temp;
-            if(stack.isEmpty()) root = temp;
-            stack.push(temp);
-            temp = temp.next;
-        }
-        return root;
+        if (head == null) return null;
+        head.next = removeNodes(head.next);
+        return head.next != null && head.val < head.next.val ? head.next : head;
         
     }
 }
