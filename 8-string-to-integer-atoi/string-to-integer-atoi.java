@@ -23,7 +23,7 @@ class Solution {
     }
 
     public int valueGenerator(String s , int sign){
-        System.out.println(sign);
+        //System.out.println(sign);
         int n = s.length();
         char[] ch = s.toCharArray();
         long value = 0l;
