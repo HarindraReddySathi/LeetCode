@@ -18,14 +18,16 @@ class Solution {
 
         int currentSize =1;
         ListNode prevEnd = trail;
+
         while(head!=null){
             if(currentSize==k){
                 prevEnd = reverseGroup(prevEnd,head);
-                head = prevEnd;
-                currentSize=0;
+                currentSize=1;
+                head = prevEnd.next;
+            }else{
+                head=head.next;
+                currentSize++;
             }
-            head=head.next;
-            currentSize++;
         }
         return trail.next;
     }
@@ -34,17 +36,20 @@ class Solution {
         
         ListNode nextGroupStart = end.next;
         ListNode start = prevEnd.next;
-        ListNode ret = start;
-        ListNode prev = nextGroupStart;
+        ListNode endAfterReverse = start;
+        prevEnd.next = end;
 
+
+        ListNode prev = nextGroupStart;
         while(start!=nextGroupStart){
             ListNode temp = start.next;
             start.next = prev;
             prev = start;
             start = temp;
         }
-        prevEnd.next = prev;
-        return ret;
+
+
+        return endAfterReverse;
 
     }
 }
