@@ -3,25 +3,23 @@ class Solution {
         Map<Integer, List<Edge>> adjacencyList = buildAdjacencyList(edges, succProb);
 
         double[] maxProbFromSrc = new double[n];
-        PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> Double.compare(b.probability, a.probability));
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
-        pq.add(new Node(src, 1.0));
+        pq.add(src);
         maxProbFromSrc[src] = 1.0;
 
         while (!pq.isEmpty()) {
-            Node currentNode = pq.poll();
-            int current = currentNode.node;
-            double currentProb = currentNode.probability;
+            int currentNode = pq.poll();
 
-            if (!adjacencyList.containsKey(current)) continue;
+            if (!adjacencyList.containsKey(currentNode)) continue;
 
-            for (Edge edge : adjacencyList.get(current)) {
+            for (Edge edge : adjacencyList.get(currentNode)) {
                 int neighborNode = edge.targetNode;
                 double probability = edge.probability;
 
-                if (maxProbFromSrc[neighborNode] < currentProb * probability) {
-                    maxProbFromSrc[neighborNode] = currentProb * probability;
-                    pq.add(new Node(neighborNode, maxProbFromSrc[neighborNode]));
+                if (maxProbFromSrc[neighborNode] < maxProbFromSrc[currentNode] * probability) {
+                    maxProbFromSrc[neighborNode] = maxProbFromSrc[currentNode] * probability;
+                    pq.add(neighborNode);
                 }
             }
         }
@@ -48,16 +46,6 @@ class Solution {
 
         Edge(int targetNode, double probability) {
             this.targetNode = targetNode;
-            this.probability = probability;
-        }
-    }
-
-    class Node {
-        int node;
-        double probability;
-
-        Node(int node, double probability) {
-            this.node = node;
             this.probability = probability;
         }
     }
