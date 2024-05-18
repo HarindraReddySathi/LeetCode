@@ -1,54 +1,64 @@
 class Solution {
     public double maxProbability(int n, int[][] edges, double[] succProb, int src, int des) {
-        
-        /*
-            - No -ve probabilities
-            - edges.length == succProb.length
-            - Does Cycle Exist - Yes
-            - can two different nodes can have how many edges between them directly(only one)
-            - can an edge exist between the same node in the final path - no
-        */
+        Map<Integer, List<Edge>> adjacencyList = buildAdjacencyList(edges, succProb);
 
-        /*3 edges
-        start = 0
-        end = 2
-        0 - 1(0.5),2(0.2)
-        1 - 0(0.5),2(0.5)
-        2 - 0(0.2),1(0.5)
+        double[] maxProbFromSrc = new double[n];
+        PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> Double.compare(b.probability, a.probability));
 
-        q = { -0(0,0)-,-1(0.5,0)-,2(0.2,0),2(1.0,1)}
+        pq.add(new Node(src, 1.0));
+        maxProbFromSrc[src] = 1.0;
 
-        0      1        2 
-        0     0.5.      1.0
+        while (!pq.isEmpty()) {
+            Node currentNode = pq.poll();
+            int current = currentNode.node;
+            double currentProb = currentNode.probability;
 
-        {current_node,parent_node}
-        */
+            if (!adjacencyList.containsKey(current)) continue;
 
-        Map<Integer,List<double[]>> adjacencyList = new HashMap<>();
-        int edgeNumber =0;
-        for(int[] edge : edges){
-            adjacencyList.computeIfAbsent(edge[0],l -> new ArrayList<>()).add(new double[]{edge[1],succProb[edgeNumber]});
-            adjacencyList.computeIfAbsent(edge[1],l -> new ArrayList<>()).add(new double[]{edge[0],succProb[edgeNumber]});
-            edgeNumber++;
-        }
-        double[] probFromSource = new double[n];
-        PriorityQueue<int[]> nodesInWait = new PriorityQueue<>((a,b) -> b[1]-a[1]);
-        nodesInWait.add(new int[]{src,src});
-        probFromSource[src]=1d;
-        while(!nodesInWait.isEmpty()){
-            int[] currentNode = nodesInWait.poll();
-            int current = currentNode[0];
-            int parent = currentNode[1];
-            if(!adjacencyList.containsKey(currentNode[0])) continue;
-            for(double[] node : adjacencyList.get(currentNode[0])){
-                int child = (int)node[0];
-                if(child==parent) continue;
-                if(probFromSource[child] < probFromSource[current]*node[1]){
-                    probFromSource[child]= probFromSource[current]*node[1];
-                    nodesInWait.add(new int[]{child,current});
+            for (Edge edge : adjacencyList.get(current)) {
+                int neighborNode = edge.targetNode;
+                double probability = edge.probability;
+
+                if (maxProbFromSrc[neighborNode] < currentProb * probability) {
+                    maxProbFromSrc[neighborNode] = currentProb * probability;
+                    pq.add(new Node(neighborNode, maxProbFromSrc[neighborNode]));
                 }
             }
         }
-        return probFromSource[des];
+
+        return maxProbFromSrc[des];
+    }
+
+    private Map<Integer, List<Edge>> buildAdjacencyList(int[][] edges, double[] succProb) {
+        Map<Integer, List<Edge>> adjacencyList = new HashMap<>();
+        for (int i = 0; i < edges.length; i++) {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            double prob = succProb[i];
+
+            adjacencyList.computeIfAbsent(u, k -> new ArrayList<>()).add(new Edge(v, prob));
+            adjacencyList.computeIfAbsent(v, k -> new ArrayList<>()).add(new Edge(u, prob));
+        }
+        return adjacencyList;
+    }
+
+    class Edge {
+        int targetNode;
+        double probability;
+
+        Edge(int targetNode, double probability) {
+            this.targetNode = targetNode;
+            this.probability = probability;
+        }
+    }
+
+    class Node {
+        int node;
+        double probability;
+
+        Node(int node, double probability) {
+            this.node = node;
+            this.probability = probability;
+        }
     }
 }
