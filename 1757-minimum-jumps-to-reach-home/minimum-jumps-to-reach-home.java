@@ -8,9 +8,7 @@ class Solution {
             forbiddenSteps.add(forbiddenStep+"_"+1);
             if(forbiddenStep>maxforbiddenStep)maxforbiddenStep=forbiddenStep;
         }
-        //int limit = findLimit(a,b,x);
-        //int limit = Math.max(maxforbiddenStep+ a + b, x + b);
-        int limit =6000;
+        int limit = Math.max(maxforbiddenStep+ a + b, x + b);
         if(forbiddenSteps.contains(0) || forbiddenSteps.contains(x)) return -1;
 
         Queue<int[]> queue = new LinkedList<>();
@@ -38,11 +36,5 @@ class Solution {
             minSteps++;
         }
         return -1;
-    }
-
-    public int findLimit(int forward , int backward,int target){
-
-        if(forward>= 2*backward) return target+forward;
-        return target+3000*backward;
     }
 }
