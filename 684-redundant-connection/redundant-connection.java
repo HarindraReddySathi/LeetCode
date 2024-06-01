@@ -10,11 +10,13 @@ class Solution {
             int left = edge[0],right = edge[1];
             int leftSize =0,rightSize=0;
             while(parent[left]!=left){
-                left = parent[left];
+                parent[left]=parent[parent[left]];
+                left = parent[parent[left]];
             }
             leftSize = size[left];
             while(parent[right]!=right){
-                right = parent[right];
+                parent[right]=parent[parent[right]];
+                right = parent[parent[right]];
             }
             rightSize = size[right];
             if(left==right){
@@ -30,6 +32,5 @@ class Solution {
             }
         }
         return result;
-
     }
 }
