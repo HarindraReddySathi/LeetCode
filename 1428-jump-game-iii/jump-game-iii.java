@@ -1,33 +1,27 @@
 class Solution {
     public boolean canReach(int[] arr, int start) {
-       if(arr[start]==0) return true;
-       int n = arr.length;
-       int[] isVisited = new int[n];
-       int dec = isPossible(arr,isVisited,start,n);
-       if(dec==1) return true;
-       return false;
-    }
-
-    public int isPossible(int[] arr,int[] isVisited,int start,int n){
-
-        if(isVisited[start]==1) return 1;
-        if(isVisited[start]==2) return -1;
-        if(arr[start]==0){
-            isVisited[start]=1;
-            return 1;
-        }
-        isVisited[start]=2;
-        int left =0,right=0;
-        if(start+arr[start]<n)
-            left = isPossible(arr,isVisited,start+arr[start],n);
-        if(left==1)isVisited[start]=1;
-        if(left==1) return 1;
-        if(start-arr[start]>=0)
-            right = isPossible(arr,isVisited,start-arr[start],n);
-        if(right==1)isVisited[start]=1;
-        if(right==1) return 1;
-        isVisited[start]=-1;
-        return -1;
         
+        if(arr[start]==0) return true;
+        int n =arr.length;
+        boolean[] isVisited = new boolean[n];
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(start);
+        isVisited[start]=true;
+        while(!queue.isEmpty()){
+            int currentIndex = queue.poll();
+            int rightNext = currentIndex+arr[currentIndex];
+            int leftNext = currentIndex-arr[currentIndex];
+            if(rightNext<n && !isVisited[rightNext]){
+                if(arr[rightNext]==0) return true;
+                isVisited[rightNext] = true;
+                queue.add(rightNext);
+            }
+            if(leftNext>=0 && !isVisited[leftNext]){
+                if(arr[leftNext]==0) return true;
+                isVisited[leftNext] = true;
+                queue.add(leftNext);
+            }
+        }
+        return false;
     }
 }
