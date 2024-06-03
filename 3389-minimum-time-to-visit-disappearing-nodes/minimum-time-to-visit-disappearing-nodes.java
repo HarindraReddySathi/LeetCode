@@ -18,7 +18,7 @@ class Solution {
             int curNode = current[0];
             int curLength = current[1];
             int curParent = current[2];
-            if (curLength >= disappear[curNode]) continue;
+            //if (curLength >= disappear[curNode]) continue;
             if (shortestPath[curNode] != -1 && shortestPath[curNode] < curLength) continue;
             if(!adjList.containsKey(curNode)) continue;
             for(int[] child : adjList.get(curNode)){
