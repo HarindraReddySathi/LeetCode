@@ -8,11 +8,10 @@ class Solution {
         for(int i =0;i<nums.length;i++){
             prev += nums[i];
             prev = prev%k;
-            nums[i] = prev;
-            if(map.containsKey(nums[i])){
-                if(i-map.get(nums[i])>1) return true;
+            if(map.containsKey(prev)){
+                if(i-map.get(prev)>1) return true;
             }else{
-                map.put(nums[i],i);
+                map.put(prev,i);
             }
         }
         return false;
