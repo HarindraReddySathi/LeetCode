@@ -10,12 +10,10 @@ class Solution {
             nums[i] %= k;
             prev = nums[i];
             if(prev<0) prev+=k;
-            System.out.println(-4%5);
-            System.out.println(prev);
             map.put(prev,map.getOrDefault(prev,0)+1);
             ans += (map.get(prev)-1);
         }
-        map.entrySet().stream().forEach(i -> System.out.println(i.getKey()+" --- "+ i.getValue()));
+        //map.entrySet().stream().forEach(i -> System.out.println(i.getKey()+" --- "+ i.getValue()));
         return ans;
     }
 }
