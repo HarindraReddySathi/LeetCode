@@ -17,9 +17,11 @@ class Solution {
         {
             for(int j=0;j<26;j++)
             {
-                for(int k=0;k<26;k++)
-                {
-                    costArr[j][k]=Math.min(costArr[j][k],costArr[j][i]+costArr[i][k]);
+                if (costArr[j][i] < Integer.MAX_VALUE) {
+                    for(int k=0;k<26;k++)
+                    {
+                        costArr[j][k]=Math.min(costArr[j][k],costArr[j][i]+costArr[i][k]);
+                    }
                 }
             }
         }
