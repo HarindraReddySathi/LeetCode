@@ -52,8 +52,9 @@ class Solution {
 
     public Parent findParent(int i, int j, Parent[][] parent){
         if(parent[i][j].x != i || parent[i][j].y != j){
-            Parent rootParent = findParent(parent[i][j].x, parent[i][j].y, parent);
-            parent[i][j] = rootParent; // Path compression
+            //Parent rootParent = findParent(parent[i][j].x, parent[i][j].y, parent);
+            //parent[i][j] = rootParent; // Path compression
+            parent[i][j] = findParent(parent[i][j].x, parent[i][j].y, parent);
         }
         return parent[i][j];
     }
