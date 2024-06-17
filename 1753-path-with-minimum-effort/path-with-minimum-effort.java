@@ -82,9 +82,9 @@ class Solution {
             return x == parent.x && y == parent.y;
         }
 
-        @Override
+        /*@Override
         public int hashCode() {
             return Objects.hash(x, y);
-        }
+        }*/
     }
 }
