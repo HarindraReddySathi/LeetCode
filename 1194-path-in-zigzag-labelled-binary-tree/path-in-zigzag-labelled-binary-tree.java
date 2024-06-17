@@ -16,7 +16,6 @@ class Solution {
             int offset = (label-start)/2;
             label = start -1 - offset;
             pow = start -1;
-            isEven*=-1;
         }
 
         Collections.reverse(zigZagLabelledBT);
