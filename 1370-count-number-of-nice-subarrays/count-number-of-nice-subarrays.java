@@ -1,10 +1,6 @@
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
-        
-        int a =  subArraysGreaterThanK(nums,k);
-        int b = subArraysGreaterThanK(nums,k+1);
-        //System.out.println(a +" -- " + b);
-        return a-b;
+        return subArraysGreaterThanK(nums,k) - subArraysGreaterThanK(nums,k+1);
     }
 
     public int subArraysGreaterThanK(int[] nums , int k){
