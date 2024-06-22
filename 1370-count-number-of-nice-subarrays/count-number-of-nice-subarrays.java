@@ -3,7 +3,7 @@ class Solution {
         
         int a =  subArraysGreaterThanK(nums,k);
         int b = subArraysGreaterThanK(nums,k+1);
-        System.out.println(a +" -- " + b);
+        //System.out.println(a +" -- " + b);
         return a-b;
     }
 
