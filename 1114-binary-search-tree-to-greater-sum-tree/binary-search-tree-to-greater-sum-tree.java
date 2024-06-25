@@ -25,8 +25,8 @@ class Solution {
 
         if(root == null) return;
         greaterSumTreeBuilder(root.right);
-        root.val+=sum;
-        sum = root.val;
+        sum += root.val;
+        root.val = sum;
         greaterSumTreeBuilder(root.left);
 
     }
