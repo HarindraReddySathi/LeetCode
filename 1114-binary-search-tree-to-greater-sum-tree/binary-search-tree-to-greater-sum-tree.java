@@ -14,18 +14,20 @@
  * }
  */
 class Solution {
+    int sum =0;
+
     public TreeNode bstToGst(TreeNode root) {
-        greaterSumTreeBuilder(root,0);
+        greaterSumTreeBuilder(root);
         return root;
     }
 
-    public int greaterSumTreeBuilder(TreeNode root,int prevSum){
+    public void greaterSumTreeBuilder(TreeNode root){
 
-        if(root == null) return prevSum;
-
-        int sum = greaterSumTreeBuilder(root.right,prevSum);
+        if(root == null) return;
+        greaterSumTreeBuilder(root.right);
         root.val+=sum;
-        return greaterSumTreeBuilder(root.left,root.val);
+        sum = root.val;
+        greaterSumTreeBuilder(root.left);
 
     }
 }
