@@ -6,10 +6,10 @@ class Solution {
         
         Arrays.sort(nums);
         
-        double ans = 51;
+        int ans = 101;
 
         while(i<j){
-            double temp = (0d+nums[i]+nums[j])/2;
+            int temp = (nums[i]+nums[j]);
             if(temp<ans){
                 ans = temp;
             }
@@ -17,6 +17,6 @@ class Solution {
             j--;
         }
 
-        return ans;
+        return (0d+ans)/2;
     }
 }
