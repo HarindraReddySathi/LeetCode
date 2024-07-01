@@ -1,93 +1,67 @@
-import java.util.*;
-
 class Solution {
     public int maxNumEdgesToRemove(int n, int[][] edges) {
-        int ans = 0;
+        
+        int ans =0;
         int totalEdges = edges.length;
 
-        // Initialize union-find arrays for Alice and Bob
-        int[] parentA = new int[n + 1];
-        int[] sizeA = new int[n + 1];
-        int[] parentB = new int[n + 1];
-        int[] sizeB = new int[n + 1];
+        int[] parentA = new int[n+1];
+        int[] sizeA = new int[n+1];
+        for(int i=0;i<=n;i++) parentA[i]=i;
+        Arrays.fill(sizeA,1);
 
-        for (int i = 1; i <= n; i++) {
-            parentA[i] = i;
-            parentB[i] = i;
-            sizeA[i] = 1;
-            sizeB[i] = 1;
+        for(int[] i : edges){
+            if(i[0]!=3) continue;
+            if(!isIncluded(i[1],i[2],parentA,sizeA)) ans++;
         }
 
-        // Process type 3 edges (usable by both Alice and Bob)
-        for (int[] edge : edges) {
-            if (edge[0] == 3) {
-                if (!union(edge[1], edge[2], parentA, sizeA)) {
-                    ans++;
-                } else {
-                    union(edge[1], edge[2], parentB, sizeB);
-                }
-            }
+
+        int[] parentB = new int[n+1];
+        int[] sizeB = new int[n+1];
+        for(int i=0;i<=n;i++) parentB[i]=parentA[i];
+        for(int i=0;i<=n;i++) sizeB[i]=sizeB[i];
+
+        for(int[] i : edges){
+            if(i[0]!=1) continue;
+            if(!isIncluded(i[1],i[2],parentA,sizeA)) ans++;
+
         }
 
-        // Process type 1 edges (usable by Alice)
-        for (int[] edge : edges) {
-            if (edge[0] == 1) {
-                if (!union(edge[1], edge[2], parentA, sizeA)) {
-                    ans++;
-                }
-            }
+        for(int[] i : edges){
+            if(i[0]!=2) continue;
+            if(!isIncluded(i[1],i[2],parentB,sizeB)) ans++;
         }
 
-        // Process type 2 edges (usable by Bob)
-        for (int[] edge : edges) {
-            if (edge[0] == 2) {
-                if (!union(edge[1], edge[2], parentB, sizeB)) {
-                    ans++;
-                }
-            }
+        int countA=0,countB=0;
+        for(int i=1;i<=n;i++){
+            if(parentA[i]==i) countA++;
+            if(parentB[i]==i) countB++;
         }
-
-        // Check if both Alice and Bob can traverse the entire graph
-        if (getCount(parentA) != 1 || getCount(parentB) != 1) {
-            return -1;
-        }
-
-        return ans;
+        return (countA==1 && countB==1) ? ans : -1;
     }
 
-    private boolean union(int u, int v, int[] parent, int[] size) {
-        int rootU = find(u, parent);
-        int rootV = find(v, parent);
+    public boolean isIncluded(int leftNode, int rightNode, int[] parent, int[] size){
+            
+            int left = findParent(leftNode,parent);
+            int right = findParent(rightNode,parent);
 
-        if (rootU == rootV) {
-            return false;
-        }
+            if(left==right) return false;
 
-        if (size[rootU] >= size[rootV]) {
-            parent[rootV] = rootU;
-            size[rootU] += size[rootV];
-        } else {
-            parent[rootU] = rootV;
-            size[rootV] += size[rootU];
-        }
-
-        return true;
-    }
-
-    private int find(int u, int[] parent) {
-        if (parent[u] != u) {
-            parent[u] = find(parent[u], parent); // Path compression
-        }
-        return parent[u];
-    }
-
-    private int getCount(int[] parent) {
-        int count = 0;
-        for (int i = 1; i < parent.length; i++) {
-            if (parent[i] == i) {
-                count++;
+            if(size[left]>=size[right]){
+                parent[right] = parent[left];
+                size[left] += size[right];
+            }else{
+                parent[left] = parent[right];
+                size[right] += size[left];
             }
+            return true;
+    }
+
+
+    public int findParent(int node, int[] parent){
+
+        if(parent[node]!=node){
+            parent[node] = findParent(parent[node],parent);
         }
-        return count;
+        return parent[node];
     }
 }
