@@ -21,15 +21,16 @@ class Solution {
         for(int i=0;i<=n;i++) sizeB[i]=sizeB[i];
 
         for(int[] i : edges){
-            if(i[0]!=1) continue;
-            if(!isIncluded(i[1],i[2],parentA,sizeA)) ans++;
+            if(i[0]==3) continue;
+            if(i[0]==1 && !isIncluded(i[1],i[2],parentA,sizeA)) ans++;
+            if(i[0]==2 && !isIncluded(i[1],i[2],parentB,sizeB)) ans++;
 
         }
 
-        for(int[] i : edges){
+        /*for(int[] i : edges){
             if(i[0]!=2) continue;
             if(!isIncluded(i[1],i[2],parentB,sizeB)) ans++;
-        }
+        }*/
 
         int countA=0,countB=0;
         for(int i=1;i<=n;i++){
