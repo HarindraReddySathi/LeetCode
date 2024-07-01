@@ -1,15 +1,16 @@
 class Solution {
     public long maximumImportance(int n, int[][] roads) {
-        
-        int[] nodes = new int[n];
-        for(int[] i : roads){
-            nodes[i[0]]++;nodes[i[1]]++;
+        int[] incoming = new int[n];
+        for(int[] road : roads){
+            incoming[road[0]]++;
+            incoming[road[1]]++;
         }
-        Arrays.sort(nodes);
-        long ans =0;
-        for(int i=n-1,cur=n;i>=0;i--,cur--){
-            ans = ans+ (1l*cur*nodes[i]);
+        Arrays.sort(incoming);
+        long maxTotalImportance =0;
+        int i = n-1;
+        while(n>0){
+            maxTotalImportance += 1l*incoming[i--]*n--;
         }
-        return ans;
+        return maxTotalImportance;
     }
 }
