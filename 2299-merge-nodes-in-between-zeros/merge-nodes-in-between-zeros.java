@@ -10,22 +10,21 @@
  */
 class Solution {
     public ListNode mergeNodes(ListNode head) {
-        ListNode root = new ListNode(-1);
-        ListNode cur = root;
-        boolean isStart = false;
+        ListNode ans = head;
+        ListNode prev = head;
+        head = head.next;
         while(head!=null){
             if(head.val!=0){
-                if(isStart){
-                    cur.next = new ListNode();
-                    cur = cur.next;
-                    isStart = false;
-                }
-                cur.val += head.val;
+                prev.val += head.val;
             }else{
-                isStart = true;
+                if(head.next ==null) prev.next = null;
+                else{
+                    prev=prev.next;
+                    prev.val = 0;
+                }
             }
             head = head.next;
         }
-        return root.next;
+        return ans;
     }
 }
