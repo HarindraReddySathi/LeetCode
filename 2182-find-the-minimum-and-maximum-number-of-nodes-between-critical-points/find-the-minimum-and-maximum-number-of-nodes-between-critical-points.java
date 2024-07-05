@@ -20,16 +20,7 @@ class Solution {
         head = head.next;
         int cur = 1;
         while(head!=null){
-            if(head.next!=null && (head.val > prevVal && head.val> head.next.val)){
-                if(start ==-1){
-                    start = cur;
-                }else{
-                    max = cur-start;
-                    if(prev==-1) prev = start;
-                    if(min>cur-prev) min = cur-prev;
-                    prev = cur;
-                }
-            }else if(head.next!=null && (head.val < prevVal && head.val < head.next.val)){
+            if(head.next!=null && ((head.val > prevVal && head.val> head.next.val)||(head.val < prevVal && head.val < head.next.val))){
                 if(start ==-1){
                     start = cur;
                 }else{
