@@ -1,13 +1,15 @@
 class Solution {
     public int duplicateNumbersXOR(int[] nums) {
-        int[] value = new int[51];
-        for(int i : nums){
-            value[i]++;
+       long mask=0;
+        int xor=0;
+        for(int k:nums){
+            int bit=(int)((mask>>k)&1L);
+            if(bit==1){
+                xor=xor^k;
+            }
+            mask=mask|(1L<<k);
         }
-        int ans =0;
-        for(int i=1;i<=50;i++){
-            if(value[i]==2) ans^=i;
-        }
-        return ans;
+        return xor ;
+
     }
 }
