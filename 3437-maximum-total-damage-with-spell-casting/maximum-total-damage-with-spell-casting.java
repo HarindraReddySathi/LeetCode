@@ -12,37 +12,34 @@ class Solution {
         }
 
         Map<Integer,Integer> freqMap = new HashMap<>();
-        Set<Integer> set = new HashSet<>();
-
         for(int i : power){
             freqMap.put(i,freqMap.getOrDefault(i,0)+1);
         }
 
-        long[] dp = new long[n];
-        dp[0] = 1l*power[0]*freqMap.get(power[0]);
-        set.add(power[0]);
-        if(!set.contains(power[1])){
-            dp[1] = 1l*power[1]*freqMap.get(power[1]);
-            dp[1] += (power[1] - power[0] <= 2) ?  0 : power[0];
-            //System.out.println(dp[1]+"****");
-        }else{
-            dp[1] = dp[0];
-        }
+        Map<Integer,Long> map = new HashMap<>();
+        long maxDamage = 0l;
 
-        //System.out.println(dp[0]);
-        //System.out.println(dp[1]);
+        map.put(power[0],1l*power[0]*freqMap.get(power[0]));
+        //System.out.println(power[0]+" -- "+map.get(power[0]));
+        if(!map.containsKey(power[1])){
+            long val = 1l*power[1]*freqMap.get(power[1]);
+            val += (power[1] - power[0] <= 2) ?  0 : map.get(power[0]);
+            map.put(power[1],val);
+            //System.out.println(power[1]+" -- "+map.get(power[1]));
+        }
+        maxDamage = map.get(power[1]);
 
         for (int i = 2; i < n; i++) {
-            if(!set.contains(power[i])){
+            if(!map.containsKey(power[i])){
                 int rightExtremePos = findMaxPosition(power[i] - 3, power);
-                long prev = (rightExtremePos == -1) ? 0 : dp[rightExtremePos];
-                dp[i] = Math.max(dp[i - 1], prev + 1l*power[i]*freqMap.get(power[i]));
-            }else{
-                dp[i] = dp[i-1];
+                long prev = (rightExtremePos == -1) ? 0 : map.get(power[rightExtremePos]);
+                long val = prev + 1l*power[i]*freqMap.get(power[i]);
+                if(maxDamage<val) maxDamage = val;
+                map.put(power[i],maxDamage);
+                //System.out.println(power[i]+" -- "+map.get(power[i]));
             }
-            //System.out.println(dp[i]);
         }
-        return dp[n - 1];
+        return maxDamage;
     }
 
     private int findMaxPosition(int key, int[] arr) {
