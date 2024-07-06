@@ -29,8 +29,8 @@ class Solution {
             dp[1] = dp[0];
         }
 
-        System.out.println(dp[0]);
-        System.out.println(dp[1]);
+        //System.out.println(dp[0]);
+        //System.out.println(dp[1]);
 
         for (int i = 2; i < n; i++) {
             if(!set.contains(power[i])){
@@ -40,7 +40,7 @@ class Solution {
             }else{
                 dp[i] = dp[i-1];
             }
-            System.out.println(dp[i]);
+            //System.out.println(dp[i]);
         }
         return dp[n - 1];
     }
