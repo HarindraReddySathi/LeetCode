@@ -6,7 +6,6 @@ class Solution {
         for(int i=1;i<n;i++){
             chalk[i] = chalk[i-1]+ck[i];
         }
-        System.out.println(chalk[n-1]);
         k %= chalk[n-1];
 
         int low =0;
