@@ -6,7 +6,7 @@ class Solution {
         
         List<int[]> l = new ArrayList<>();
         
-        boolean[][] check = new boolean[m][n];
+        //boolean[][] check = new boolean[m][n];
         
         int oneCount =0;
         
@@ -16,26 +16,26 @@ class Solution {
         
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                if(check[i][j]) continue;
-                check[i][j] = true;
+                if(grid[i][j]==-1) continue;
+                
                 int[] count = new int[2];
                 count[grid[i][j]]++;
                 int total = 1;
-                
+                grid[i][j] = -1;
                 if(m-1-i>=0 && m-1-i<m && m-1-i!=i){
                     count[grid[m-1-i][j]]++;
                     total++;
-                    check[m-1-i][j] = true;
+                    grid[m-1-i][j] = -1;
                 }
                 if(n-1-j>=0 && n-1-j<n && n-1-j!=j){
                     count[grid[i][n-1-j]]++;
                     total++;
-                    check[i][n-1-j] = true;
+                    grid[i][n-1-j] = -1;
                 }
                 if(m-1-i>=0 && m-1-i<m && n-1-j>=0 && n-1-j<n && m-1-i!=i && n-1-j!=j){
                     count[grid[m-1-i][n-1-j]]++;
                     total++;
-                    check[m-1-i][n-1-j] = true;
+                    grid[m-1-i][n-1-j] = -1;
                 }
                 if(count[0]==1 && count[1]==0) dec[1] = true;
                 if(count[0]==0 && count[1]==1) dec[0] = true;
