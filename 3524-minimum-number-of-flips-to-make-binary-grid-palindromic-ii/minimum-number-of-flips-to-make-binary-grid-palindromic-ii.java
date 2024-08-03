@@ -51,15 +51,15 @@ class Solution {
             }
         }
         
-        for(int[] i : l){
+        /*for(int[] i : l){
             System.out.println(i[0]+" -- "+i[1]);
-        }
+        }*/
         
         
         
         
         int rem = (oneCount%4);
-        System.out.println("####### "+ rem);
+        //System.out.println("####### "+ rem);
         
         if(rem ==0){
             return flips;
