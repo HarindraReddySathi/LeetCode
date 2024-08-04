@@ -1,14 +1,16 @@
 class Solution {
     public int rangeSum(int[] nums, int n, int left, int right) {
         
-        //List<Integer> list = new ArrayList<>();
+        
         int[] list = new int[(n*(n+1)/2)];
         int pos =0;
         for(int i=0;i<n;i++){
-            int sum =0;
-            for(int j=i;j<n;j++){
-                sum+=nums[j];
-                list[pos++] = sum;
+            //int sum =0;
+            list[pos++] = nums[i];
+            for(int j=i+1;j<n;j++){
+                //sum+=nums[j];
+                list[pos] = list[pos-1] + nums[j];
+                pos++;
             }
         }
         Arrays.sort(list);
