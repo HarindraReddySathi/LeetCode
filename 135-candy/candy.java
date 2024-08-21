@@ -1,35 +1,35 @@
 class Solution {
-    public int candy(int[] r) {
-        //return 0;
-        int n = r.length;
-        int[] prefix = new int[n];
-        //Arrays.fill(prefix,-1);
-        int cur=1;
-        for(int i=0;i<n-1;i++){
-            prefix[i]=cur;
-            if(r[i]<r[i+1]){
-                cur++;
+    public int candy(int[] ratings) {
+        
+        int n = ratings.length;
+
+        int[] l2R = new int[n];
+        l2R[0] = 1;
+        int[] r2L = new int[n];
+        r2L[n-1] = 1;
+
+        for(int i=1;i<n;i++){
+            if(ratings[i]>ratings[i-1]){
+                l2R[i] = l2R[i-1]+1;
             }else{
-                cur=1;
+                l2R[i] = 1;
             }
         }
-        prefix[n-1]=cur;
-        int[] sufix = new int[n];
-        //Arrays.fill(sufix,-1);
-        cur=1;
-        for(int i=n-1;i>0;i--){
-            sufix[i]=cur;
-            if(r[i]<r[i-1]){
-                cur++;
+
+        for(int i=n-2;i>=0;i--){
+            if(ratings[i]>ratings[i+1]){
+                r2L[i] = r2L[i+1]+1;
             }else{
-                cur=1;
+                r2L[i] = 1;
             }
         }
-        sufix[0]=cur;
-        int ans =0;
+
+        int totalCandiesRequired =0;
+
         for(int i=0;i<n;i++){
-            ans+=Math.max(prefix[i],sufix[i]);
+            totalCandiesRequired += Math.max(r2L[i],l2R[i]);
         }
-        return ans;
+
+        return totalCandiesRequired;
     }
 }
