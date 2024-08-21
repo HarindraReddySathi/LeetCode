@@ -14,33 +14,22 @@
  * }
  */
 class Solution {
-
-    int ans =0;
-
+    int ans = 0;
     public int longestZigZag(TreeNode root) {
         
-        int left = DFS(root.right,1);
-        int right = DFS(root.left,-1);
-
-        if(left>ans) ans =left;
-        if(right>ans) ans = right;
-
+        postOrderTraversal(root,-1);
         return ans;
     }
 
-    public int DFS(TreeNode root,int parent_direction){
+    public int postOrderTraversal(TreeNode root,int previous){
 
-        if(root == null){
-            return 0;
-        }
+        if(root == null) return 0;
 
-        int left = DFS(root.left,-1);
-        int right = DFS(root.right,1);
-        
-        if(left>ans) ans =left;
-        if(right>ans) ans = right;
+        int right = postOrderTraversal(root.right,1);
+        int left = postOrderTraversal(root.left,0);
 
-        return (parent_direction==1) ? left+1: right+1;
+        ans = Math.max(Math.max(right,left),ans);
 
+        return (previous==0) ? right+1 : left+1;
     }
 }
