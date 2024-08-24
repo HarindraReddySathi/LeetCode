@@ -1,105 +1,52 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
 class LRUCache {
 
-    private DoublyLinkedListNode head;
-    private DoublyLinkedListNode tail;
-    private int size;
     private int capacity;
-    private Map<Integer, DoublyLinkedListNode> map;
+    private Map<Integer, Integer> map; // Key to value mapping
+    private LinkedList<Integer> list; // Tracks the order of usage
 
     public LRUCache(int capacity) {
-        this.size = 0;
         this.capacity = capacity;
         this.map = new HashMap<>();
-        this.head = new DoublyLinkedListNode();
-        this.tail = new DoublyLinkedListNode();
-        head.setNext(tail);
-        tail.setPrevious(head);
+        this.list = new LinkedList<>();
     }
 
     public int get(int key) {
-        if (!map.containsKey(key)) return -1;
+        if (!map.containsKey(key)) {
+            return -1; // Key is not present in cache
+        }
 
-        DoublyLinkedListNode current = map.get(key);
-
-        // Move the accessed node to the head (most recently used)
-        removeNode(current);
-        addNodeAtHead(current);
-        return current.getValue();
+        // Move the accessed key to the front (most recently used)
+        list.remove((Integer) key); // Remove the key from its current position
+        list.addFirst(key); // Add it to the front
+        return map.get(key); // Return the value associated with the key
     }
 
     public void put(int key, int value) {
         if (map.containsKey(key)) {
-            // Update the existing node
-            DoublyLinkedListNode current = map.get(key);
-            current.setValue(value);
-            removeNode(current);
-            addNodeAtHead(current);
+            // If the key exists, update its value and move it to the front
+            map.put(key, value);
+            list.remove((Integer) key); // Remove the key from its current position
+            list.addFirst(key); // Add it to the front
         } else {
-            // Check if cache is full
-            if (size == capacity) {
-                // Remove the least recently used node
-                DoublyLinkedListNode lru = tail.getPrevious();
-                removeNode(lru);
-                map.remove(lru.key); // Remove from map
-                size--;
+            // If the key does not exist and the cache is full, evict the LRU item
+            if (list.size() == capacity) {
+                int lruKey = list.removeLast(); // Remove the last item (LRU)
+                map.remove(lruKey); // Remove the LRU key from the map
             }
-            // Add the new node
-            DoublyLinkedListNode newNode = new DoublyLinkedListNode(key, value);
-            addNodeAtHead(newNode);
-            map.put(key, newNode);
-            size++;
+            // Add the new key-value pair
+            map.put(key, value);
+            list.addFirst(key); // Add the key to the front (most recently used)
         }
     }
-
-    public void removeNode(DoublyLinkedListNode node) {
-        node.getPrevious().setNext(node.getNext());
-        node.getNext().setPrevious(node.getPrevious());
-    }
-
-    public void addNodeAtHead(DoublyLinkedListNode node) {
-        node.setNext(head.getNext());
-        node.getNext().setPrevious(node); // Set the previous of the next node
-        head.setNext(node);
-        node.setPrevious(head);
-    }
 }
 
-class DoublyLinkedListNode {
-
-    int key;
-    private int value;
-    private DoublyLinkedListNode next;
-    private DoublyLinkedListNode previous;
-
-    public DoublyLinkedListNode() {
-    }
-
-    public DoublyLinkedListNode(int key, int value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public int getValue() {
-        return this.value;
-    }
-
-    public void setNext(DoublyLinkedListNode next) {
-        this.next = next;
-    }
-
-    public DoublyLinkedListNode getNext() {
-        return this.next;
-    }
-
-    public void setPrevious(DoublyLinkedListNode previous) {
-        this.previous = previous;
-    }
-
-    public DoublyLinkedListNode getPrevious() {
-        return this.previous;
-    }
-}
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
