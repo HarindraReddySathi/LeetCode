@@ -3,82 +3,89 @@ import java.util.Map;
 
 class LRUCache {
 
-    private DoublyLinkedListNode head;
-    private DoublyLinkedListNode tail;
-    private int size;
-    private int capacity;
-    private Map<Integer, DoublyLinkedListNode> map;
-
-    public LRUCache(int capacity) {
-        this.size = 0;
-        this.capacity = capacity;
-        this.map = new HashMap<>();
-        this.head = new DoublyLinkedListNode();
-        this.tail = new DoublyLinkedListNode();
-        head.next = tail;
-        tail.previous = head;
-    }
-
-    public int get(int key) {
-        if (!map.containsKey(key)) return -1;
-
-        DoublyLinkedListNode current = map.get(key);
-
-        // Move the accessed node to the head (most recently used)
-        removeNode(current);
-        addNodeAtHead(current);
-        return current.value;
+    int capacity;
+	int size;
+	Map<Integer,Node> map;
+	Node head;
+	Node tail;
+	
+	public LRUCache(int capacity) {
+		this.capacity = capacity;
+		this.size =0;
+		this.map = new HashMap<>();
+		head = new Node();
+		tail = new Node();
+		head.next = tail;
+		tail.prev = head;
+		
+	}
+	
+	/// public int get(int key) throws Exception{
+	
+	public int get(int key) {
+		
+		//if(!map.containsKey(key)) throw new Exception();
+		
+		if(!map.containsKey(key)) return -1;
+		
+		Node current = map.get(key);
+		deleteNode(current);
+		addNodeToHead(current);
+		return current.value;
+		
     }
 
     public void put(int key, int value) {
-        if (map.containsKey(key)) {
-            // Update the existing node
-            DoublyLinkedListNode current = map.get(key);
-            current.value = value;
-            removeNode(current);
-            addNodeAtHead(current);
-        } else {
-            // Check if cache is full
-            if (size == capacity) {
-                // Remove the least recently used node
-                DoublyLinkedListNode lru = tail.previous;
-                removeNode(lru);
-                map.remove(lru.key); // Remove from map
-                size--;
-            }
-            // Add the new node
-            DoublyLinkedListNode newNode = new DoublyLinkedListNode(key, value);
-            addNodeAtHead(newNode);
-            map.put(key, newNode);
-            size++;
-        }
-    }
+    	
+    	if(map.containsKey(key)) {
+    		Node current = map.get(key);
+    		deleteNode(current);
+    		addNodeToHead(current);
+    		current.value = value;
 
-    public void removeNode(DoublyLinkedListNode node) {
-        node.previous.next = node.next;
-        node.next.previous = node.previous;
+    	}else {
+    		Node current = new Node(key,value);
+            map.put(key,current);
+    		addNodeToHead(current);
+    		size++;
+    		if(size>capacity) {
+    			map.remove(tail.prev.key);
+    			deleteNode(tail.prev);
+    			size--;
+    		}
+    		
+    	}
     }
+    
+    private void addNodeToHead(Node node) {
+    	Node temp = head.next;
+    	head.next = node;
+    	node.next = temp;
+    	node.prev = head;
+    	temp.prev = node;
+    }
+    
+    private void deleteNode(Node node) {
+    	Node temp = node.next;
+    	node.prev.next = temp;
+    	temp.prev = node.prev;
+    }
+	
 
-    public void addNodeAtHead(DoublyLinkedListNode node) {
-        node.next = head.next;
-        head.next.previous = node;
-        head.next = node;
-        node.previous = head;
-    }
 }
 
-class DoublyLinkedListNode {
+class Node{
+	
+	public int key;
+	public int value;
+	public Node next;
+	public Node prev;
+	
+	public Node(int key,int value) {
+		this.key = key;
+		this.value = value;
+	}
 
-    public int key;
-    public int value;
-    public DoublyLinkedListNode next;
-    public DoublyLinkedListNode previous;
-
-    public DoublyLinkedListNode() {
-    }
-
-    public DoublyLinkedListNode(int key, int value) {
-        this.key = key;
-        this.value = value;
-    }
+	public Node() {}
+	
 }
