@@ -1,59 +1,56 @@
 class Solution {
     public int removeStones(int[][] stones) {
         
-        int numberOfStones = stones.length;
-        List<int[]> connectedStones = findConnectedStones(stones,numberOfStones);
-        int[] rootStone = new int[numberOfStones];
-        for(int i=0;i<numberOfStones;i++) rootStone[i]=i;
-        int[] clusterSize = new int[numberOfStones];
-        Arrays.fill(clusterSize,1);
-
-        for(int[] edge : connectedStones){
-            int left = findRoot(rootStone,edge[0]);
-            int right = findRoot(rootStone,edge[1]);
-
-            if(left==right) continue;
-
-            if(clusterSize[left]>=clusterSize[right]){
-                rootStone[right]=left;
-                clusterSize[left]+=clusterSize[right];
-            }else{
-                rootStone[left]=right;
-                clusterSize[right]+=clusterSize[left];
-            }
-        }
-        int clusterCount =0;
-        for(int i=0;i<numberOfStones;i++){
-            if(rootStone[i]==i) clusterCount++;
-        }
-        return numberOfStones-clusterCount;
-    }
-
-    public int findRoot(int[] rootStone,int stone){
-
-        if(rootStone[stone]!=stone){
-            rootStone[stone] = findRoot(rootStone,rootStone[stone]);
-        }
-        return rootStone[stone];
-    }
-
-    public List<int[]> findConnectedStones(int[][] stones,int numberOfStones){
-
-        List<int[]> connectedStones = new ArrayList<>();
-
-        for(int i=0;i<numberOfStones;i++){
-            for(int j=i+1;j<numberOfStones;j++){
-                if(isConnectedStones(stones[i],stones[j])){
-                    connectedStones.add(new int[]{i,j});
+        int n = stones.length;
+        List<int[]> edges = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(stones[i][0]==stones[j][0] || stones[i][1]==stones[j][1]){
+                    edges.add(new int[]{i,j});
                 }
             }
         }
-        return connectedStones;
+
+        int[] parent = new int[n];
+        for(int i=0;i<n;i++) parent[i]=i;
+        int[] size = new int[n];
+        Arrays.fill(size,1);
+
+        for(int[] edge : edges){
+
+            int left = getParent(parent,edge[0]);
+            int right = getParent(parent,edge[1]);
+
+            if(left == right) continue;
+
+            if(size[left]>size[right]){
+                size[left]+=size[right];
+                parent[right] = left;
+            }else{
+                size[right]+=size[left];
+                parent[left] = right;
+            }
+        }
+        /*for(int i : parent)
+        System.out.println(i);
+         for(int i : size)
+        System.out.println(i);*/
+
+        int max =0;
+
+        for(int i=0;i<n;i++){
+            if(parent[i]==i){
+                max += size[i]-1;
+            }
+        }
+
+        return max;
     }
 
-    public boolean isConnectedStones(int[] firstStone ,int[] secondStone){
-
-        if(firstStone[0]==secondStone[0] || firstStone[1]==secondStone[1]) return true;
-        return false;
+    public int getParent(int[] parent, int i){
+        if(parent[i]!=i){
+            parent[i] = getParent(parent,parent[i]);
+        }
+        return parent[i];
     }
 }
