@@ -1,0 +1,1 @@
+<h2>k-th-nearest-obstacle-queries Notes</h2><hr>[ Time taken: 13 m 16 s ]
