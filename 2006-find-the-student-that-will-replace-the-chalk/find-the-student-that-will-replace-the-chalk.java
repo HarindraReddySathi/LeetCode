@@ -1,25 +1,21 @@
 class Solution {
-    public int chalkReplacer(int[] ck, int k) {
-        int n = ck.length;
-        long[] chalk = new long[n];
-        chalk[0] = ck[0];
-        for(int i=1;i<n;i++){
-            chalk[i] = chalk[i-1]+ck[i];
+    public int chalkReplacer(int[] chalk, int k) {
+        
+        long sum = 0;
+        int n = chalk.length;
+        for(int i=0;i<n;i++){
+            sum += chalk[i];
         }
-        k %= chalk[n-1];
-
-        int low =0;
-        int high = n-1;
-        int ans = -1;
-        while(low<=high){
-            int mid = low + ((high-low)>>1);
-            if(chalk[mid]<=k){
-                low = mid+1;
-            }else{
-                high = mid-1;
-                ans = mid;
+        k = (int)(k%sum);
+        sum=0;
+        int replaceIdx = -1;
+        for(int i=0;i<n;i++){
+            sum += chalk[i];
+            if(sum > k){
+                replaceIdx = i;
+                break;
             }
         }
-        return ans;
+        return replaceIdx;
     }
 }
