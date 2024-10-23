@@ -37,7 +37,7 @@ class Solution {
                     sum += cur.right.val;
                 } 
             }
-            System.out.println(sum);
+            //System.out.println(sum);
             if(sum>max && !q.isEmpty()){
                 max = sum;
                 ans = level+1;
